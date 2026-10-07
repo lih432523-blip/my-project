@@ -1,0 +1,10 @@
+method,chunk_size,num_chunks,avg_len,min_len,max_len
+fixed,256,161,243.2,31,256
+fixed,512,83,469.5,77,512
+fixed,1024,43,892.3,155,1024
+recursive,256,170,208.0,54,256
+recursive,512,82,432.2,70,512
+recursive,1024,40,887.1,89,1021
+semantic,256,167,211.7,1,792
+semantic,512,86,412.1,48,792
+semantic,1024,42,844.9,221,1023
