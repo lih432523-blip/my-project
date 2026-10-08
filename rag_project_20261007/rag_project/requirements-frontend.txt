@@ -1,0 +1,2 @@
+# Frontend-only installation; does not install Torch/CUDA or download models.
+streamlit>=1.40,<2
