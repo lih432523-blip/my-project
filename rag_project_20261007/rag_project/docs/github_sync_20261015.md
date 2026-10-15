@@ -13,14 +13,14 @@
 
 本地原始论文、模型、向量库、运行缓存、会话数据、临时故障/冒烟目录及 IDE 文件不在同步范围内。Git 忽略规则仅防止误提交，不删除这些本地文件。
 
-仓库 `.gitattributes` 对实验数据、报告及参与运行指纹的代码关闭自动换行转换；上传前逐一核对 Git 暂存对象与本地原始文件，避免 Windows 的 CRLF/LF 转换使审计 SHA-256 失效。评分前备份和 23 题续跑来源保留在正式目录中，供追溯原评分字段及继承记录。
+仓库 `.gitattributes` 对实验数据、报告及参与运行指纹的代码关闭自动换行转换；上传前逐一核对 Git 暂存对象与本地原始文件，避免 Windows 的 CRLF/LF 转换使审计 SHA-256 失效。评分前备份和 23 题续跑来源保留在正式目录中，供追溯原评分字段及继承记录。原有 11 个源码文件仅恢复与测量时一致的换行格式，没有改变业务逻辑；由此 29 个后端文件与正式检索实验的指纹逐一一致。
 
 ## 上传前验证
 
 1. `python scripts/run55.py --check-only`：通过；55 题、15 个 PDF、四类题型分布正确。该检查验证结构与源文件存在，不等同于答案质量验证。
 2. `python B_Module5_Report_20261014/scripts/verify_package.py --check-original`：通过；28 页报告、8 组图、7 个表片段、55 题 Agent、495 条检索记录及原始输入 SHA-256 一致。原有版面核验记录随报告保留。
 3. 关键 Python 文件 AST 解析：通过；未检出嵌入凭据或个人用户目录硬编码。
-4. 原有 `python -m unittest discover -s tests -v`：共 16 项，15 项通过，1 项 UI 测试报错。当前 NLP 环境的 Streamlit 版本为 1.65.0；`test_chat_history_switch_delete_and_reload` 在 AppTest 获取 widget 状态时抛出 `ValueError: '现在几点？' is not in list`。本次没有修改前端代码，也不将该结果记为全套测试通过。
+4. 原有 `python -m unittest discover -s tests -v`：共 16 项，15 项通过，1 项 UI 测试报错。当前 NLP 环境的 Streamlit 版本为 1.65.0；`test_chat_history_switch_delete_and_reload` 在 AppTest 获取 widget 状态时抛出 `ValueError: '现在几点？' is not in list`。本次没有修改前端业务逻辑，也不将该结果记为全套测试通过。
 
 未重新运行完整模型评测或重新评分；上传不改变已有 55 题/495 条正式实验结论。
 
