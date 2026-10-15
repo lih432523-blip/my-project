@@ -1,0 +1,33 @@
+{
+  "prepared_at": "2026-10-10T22:12:27+08:00",
+  "qa_sha256": "67fb86f8ca410d68859a03e850526d35ca201d0513ea7dc80b946a259b241582",
+  "questions": 55,
+  "categories": {
+    "factual": 20,
+    "comparison": 15,
+    "summary": 10,
+    "reasoning": 10
+  },
+  "distinct_canonical_papers": 15,
+  "evidence_fragments": 142,
+  "evidence_validation": "Every evidence fragment matched the specified original PDF physical page after NFKC and whitespace normalization; page bounds and source existence checked.",
+  "source_evidence_counts": {
+    "An_Image_is_Worth_16x16_Words.pdf": 10,
+    "Deep_Residual_Learning_for_Image_Recognition.pdf": 10,
+    "attention_is_all_you_need.pdf": 9,
+    "2311.10122v3.pdf": 13,
+    "2401.09417v3.pdf": 11,
+    "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf": 7,
+    "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf": 9,
+    "applsci-16-10003.pdf": 11,
+    "diagnostics-16-03259.pdf": 8,
+    "energies-19-04788.pdf": 10,
+    "engproc-157-00021.pdf": 7,
+    "engproc-159-00004.pdf": 11,
+    "oral-06-00131.pdf": 7,
+    "sensors-26-06403.pdf": 10,
+    "sustainability-18-10291.pdf": 9
+  },
+  "reference_answers": "Reviewed against primary source PDF pages; no model-generated predictions used as ground truth.",
+  "model_evaluation_status": "Not run; no evaluation scores generated."
+}

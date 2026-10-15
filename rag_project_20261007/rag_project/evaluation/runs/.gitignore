@@ -1,0 +1,12 @@
+# Publish the fixed formal baselines and their 23-question resume source only.
+/*
+!/.gitignore
+!/agent55_20261014_162205_a10fcc/
+!/agent55_20261014_175735_da23d1/
+!/retrieval55_20261014_193104_b35edd/
+!/retrieval55_20261014_210831_0865ca/
+!/retrieval55_20261014_212257_280fb9/
+
+# Persistent embeddings and transient progress files stay on the experiment host.
+**/vector_store/
+**/*.tmp

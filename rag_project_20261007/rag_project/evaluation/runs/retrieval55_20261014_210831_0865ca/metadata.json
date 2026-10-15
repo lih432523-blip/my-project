@@ -1,0 +1,213 @@
+{
+  "run_id": "20261014_210831_5fe12a09",
+  "started_at": "2026-10-14T21:08:31+08:00",
+  "smoke": false,
+  "python": "3.10.20 | packaged by Anaconda, Inc. | (main, Mar 11 2026, 17:42:35) [MSC v.1942 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "packages": {
+    "torch": "2.11.0+cu126",
+    "chromadb": "1.5.9",
+    "sentence-transformers": "6.1.0",
+    "rank-bm25": "0.2.2",
+    "pdfplumber": "0.11.10",
+    "ollama": "0.6.3",
+    "streamlit": "1.65.0"
+  },
+  "git_commit": "aba31b37872f459468d915956141301bf24f0963",
+  "script_sha256": "c5040080f0e5634a5792e789ba60249345d3cbb5f052554193286fccab11bdd0",
+  "token_script_sha256": "2f04ea933cdeea62a2b740a5772960269731406950591a90e14a84cabdce8306",
+  "backend_sha256": {
+    "src\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src\\agent\\__init__.py": "0bd62d3e0d9a0c80fd732f2829a1be867bd1113c8a21858af27f8478b8b5b95d",
+    "src\\agent\\agent.py": "b4e886d40a7649b76455fa4feb79666d38eb36fd186fce9ee980ed2c2e16d62b",
+    "src\\agent\\health.py": "0f313695450c1c106a02725713815c85f8fa55aaacd2fc4d6fc4eae63e80f756",
+    "src\\agent\\llm_client.py": "4885974396419fae64a60e97cdbc91d870092efa3aab17b9b75990c2e3528c1b",
+    "src\\agent\\memory.py": "0a29280e86fab187cca257e7bd82d7e6934e94a9edefea3f230e844871216811",
+    "src\\agent\\observability.py": "6290999d9003ced29a8fd4c8e6a69d67ab91136dbcddedc941e5df5b83e06c34",
+    "src\\agent\\paper_compare.py": "4753d01c1a62f8186e97904ea6bd0c32c093b111e647b0424f2ad179b3c2555d",
+    "src\\agent\\paper_scope.py": "c437b06f8d7524d0b709867d81183e3f8820fed7bd16aeeab0a5dc350a977f32",
+    "src\\agent\\prompts.py": "a92235084bc3ebbc621ce83da5bd50fa1ee4e4bd6f3ca74534a444302e2ffb5d",
+    "src\\agent\\react_loop.py": "510ecd6086d758a9ffab9dc340ef11652d2ed1aafa54b6e65d2743510657258e",
+    "src\\agent\\router.py": "0f4de48c9924674ed64cc937aea7f6d9d3c4b468c0ac76008ee953816624b255",
+    "src\\agent\\tools.py": "5d7034becb4dc4720a1df5c663d44d16a6fe9186ebce56028531fdab11849a78",
+    "src\\chunking\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src\\chunking\\chunker.py": "6d5857c878c9a53cee6a8617c71ad3533418b3abea89d360e98879dca57bd01d",
+    "src\\chunking\\experiment.py": "a2d68afa13271032e1dce5dd1c70a50f546f44d52a8e2dd4c8a04f766f6b8ea1",
+    "src\\config.py": "9d634460a67dd85d4645cbe08b26eb03102bb079772641260608592f94fd3567",
+    "src\\data_loader\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src\\data_loader\\pdf_loader.py": "06c89fe56db766ff3c05fa19e45cb85472ce31f62f1befbb2bb4457b496523d8",
+    "src\\frontend\\__init__.py": "21a0b66398e6ec1d1ceaabb477bdf9744efba9b8df5be2c29907e8fe1f0cb628",
+    "src\\frontend\\service.py": "73b295947aa5adb7f09d24981830027505527cdd51b72c4d2211460fdd17d4f2",
+    "src\\frontend\\state.py": "4cea7918630d4cc15d388bc32d7e08673ef98f9f6fdada9f0cc420607fe4dee7",
+    "src\\generation\\__init__.py": "f73cf7d8ebda13f23cc5ad3b7e5eb416704a3150bbf6e61b95cc90d7bddd8727",
+    "src\\generation\\rag_pipeline.py": "5a3a6baeac0c930ea6f63b89a7aa359d20d004adef0ab01997fa6e59e7edd6c7",
+    "src\\retrieval\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src\\retrieval\\bm25_retriever.py": "511e653a3633f0baa59c945256841e8e77c232a69a446397dd189fbce9a4d6c9",
+    "src\\retrieval\\hybrid_retriever.py": "8c37b74cc06f2337f07334111dd05e3685f62ad885e12130ff13bd8e3de84ffb",
+    "src\\retrieval\\reranker.py": "eec79a8b62fe0012e14d7433c4c6fb3939b23acefcd16bc4722afc1e5283c009",
+    "src\\retrieval\\vector_store.py": "90e09084378139c4db833e23bb92b1f38cdb8f9b1e8ad75b5a9d03be98277010"
+  },
+  "qa_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\qa.jsonl",
+  "qa_sha256": "67fb86f8ca410d68859a03e850526d35ca201d0513ea7dc80b946a259b241582",
+  "corpus": [
+    {
+      "source": "2311.10122v3.pdf",
+      "bytes": 3486722,
+      "sha256": "b7914d4dc854e8fe1f5f22c9708b4771dc1e7021180d845aecd5014ef1e9c30d"
+    },
+    {
+      "source": "2401.09417v3.pdf",
+      "bytes": 1118652,
+      "sha256": "15c3ccf7340a412e6ce408526c03a67e412d9bb4958e6c0bfe310394b6337444"
+    },
+    {
+      "source": "An_Image_is_Worth_16x16_Words.pdf",
+      "bytes": 3743814,
+      "sha256": "8ce7b83971a14508ca711a27c875c9b6914c4f6767cf3150fb1ca6c07aa056d6"
+    },
+    {
+      "source": "applsci-16-10003.pdf",
+      "bytes": 4634542,
+      "sha256": "7fecd86140254891ef10c2e36167383299195f814f8ef9a1b78ea9a5f95e7d7a"
+    },
+    {
+      "source": "attention_is_all_you_need.pdf",
+      "bytes": 2215244,
+      "sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697"
+    },
+    {
+      "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+      "bytes": 603123,
+      "sha256": "51b5de45eb0b558b19c3affe49503cff50cb170a32de602983d6e2ec286942a7"
+    },
+    {
+      "source": "diagnostics-16-03259.pdf",
+      "bytes": 7192480,
+      "sha256": "2f6972b502fc0b3061e8f1900f866fae135cc393b287825546bdbde2d4cccc09"
+    },
+    {
+      "source": "energies-19-04788.pdf",
+      "bytes": 3297892,
+      "sha256": "7b4d493148631d2db3090bb9ca984b36bb19d7d5c051ce5ffdfda4ae1285fec1"
+    },
+    {
+      "source": "engproc-157-00021.pdf",
+      "bytes": 18640733,
+      "sha256": "fcf3fce16ed243477cdb0b23d2d5f51ba6d020a28a7cac9752ad7b6009fadeae"
+    },
+    {
+      "source": "engproc-159-00004.pdf",
+      "bytes": 18356782,
+      "sha256": "2ba6c5b4db4aea1b488b93b17769386166b8727f136401375b19075e4d40db20"
+    },
+    {
+      "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+      "bytes": 1273114,
+      "sha256": "27f8bac3ab040df1dfc84b9ae041038c066b1bd29967b98e19ddbb91f069645a"
+    },
+    {
+      "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+      "bytes": 513220,
+      "sha256": "3d4aa1be75015b10e40a3b1215ddcc2da49a3a8ac651c33781c346b52ecc360d"
+    },
+    {
+      "source": "oral-06-00131.pdf",
+      "bytes": 1507823,
+      "sha256": "de060a66ab927ee46fc9c6f5ff7b5a50cfe3adbe84f10a92aecb4de318821ede"
+    },
+    {
+      "source": "sensors-26-06403.pdf",
+      "bytes": 15912081,
+      "sha256": "4a4bd630b89e36e19fe691b5c86e1c9a8008144b98d7af257fe481506a825f67"
+    },
+    {
+      "source": "sustainability-18-10291.pdf",
+      "bytes": 32295064,
+      "sha256": "2ed8eef2c3d3cdd22ad9d55d01d7067fdfc6b1af20a68e90097977c13bc43119"
+    }
+  ],
+  "corpus_sha256": "6306dd225f7dad1926a6b763c9be3385e5ff2d52bb7680db746799767c1e897b",
+  "parameters": {
+    "mode": "retrieval",
+    "chunk_size": 256,
+    "overlap": 50,
+    "recall_k": 20,
+    "top_k": 5,
+    "limit": null,
+    "use_memory": false
+  },
+  "notes": [
+    "Gold retrieval unit: exact PDF filename and physical PDF page.",
+    "Backend explicit config construction records index provenance/storage in runtime; each evaluation output is new.",
+    "No correctness score is inferred from backend success."
+  ],
+  "validation": {
+    "valid": true,
+    "smoke": false,
+    "qa_rows": 55,
+    "pdf_count": 15,
+    "categories": {
+      "factual": 20,
+      "comparison": 15,
+      "summary": 10,
+      "reasoning": 10
+    },
+    "errors": [],
+    "warnings": [],
+    "scope": "Checks schema and source existence only; humans must verify evidence and PDF page bounds."
+  },
+  "preflight": {
+    "required": false,
+    "status": "not_required"
+  },
+  "status": "completed",
+  "result_rows": 165,
+  "metadata_revision": 334,
+  "runtime": {
+    "embedding_model": "BAAI/bge-large-zh-v1.5",
+    "reranker_model": "BAAI/bge-reranker-base",
+    "device": "cpu",
+    "ollama_host": "http://127.0.0.1:11434",
+    "ollama_model": "qwen2.5:7b",
+    "legacy_defaults_detected": [
+      "generation/__init__.py",
+      "generation/rag_pipeline.py",
+      "retrieval/vector_store.py",
+      "retrieval/reranker.py"
+    ],
+    "llm_options": {},
+    "llm_timeout_s": 120,
+    "data_dir": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\corpus",
+    "vector_dir": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\retrieval55_20261014_210831_0865ca\\vector_store"
+  },
+  "model_load_s": 26.28160909999997,
+  "build_index_s": 657.9015218999999,
+  "index_reused": false,
+  "chunk_count": 4335,
+  "indexed_sources": [
+    "2311.10122v3.pdf",
+    "2401.09417v3.pdf",
+    "An_Image_is_Worth_16x16_Words.pdf",
+    "Deep_Residual_Learning_for_Image_Recognition.pdf",
+    "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+    "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+    "applsci-16-10003.pdf",
+    "attention_is_all_you_need.pdf",
+    "diagnostics-16-03259.pdf",
+    "energies-19-04788.pdf",
+    "engproc-157-00021.pdf",
+    "engproc-159-00004.pdf",
+    "oral-06-00131.pdf",
+    "sensors-26-06403.pdf",
+    "sustainability-18-10291.pdf"
+  ],
+  "token_instrumentation": "module5_tokens.TokenCapture",
+  "warmup_s": 1.9267631999998684,
+  "warmup_enabled": true,
+  "active_question": null,
+  "active_method": null,
+  "last_completed_question": "R10",
+  "finished_at": "2026-10-14T21:22:23+08:00",
+  "failed_rows": 0
+}

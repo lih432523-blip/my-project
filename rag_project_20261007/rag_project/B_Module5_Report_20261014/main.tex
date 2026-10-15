@@ -1,0 +1,391 @@
+% !TeX program = xelatex
+% Standalone report package. Compile from this directory; figures and tables are local.
+\documentclass[UTF8,a4paper,zihao=-4,fontset=none]{ctexart}
+\usepackage[margin=24mm,headheight=18pt]{geometry}
+\usepackage{fontspec}
+\IfFontExistsTF{FangSong}{\setCJKmainfont{FangSong}[BoldFont=SimHei]\setCJKsansfont{SimHei}}{\setCJKmainfont{FandolFang-Regular.otf}[BoldFont=FandolHei-Bold.otf]\setCJKsansfont{FandolHei-Regular.otf}}
+\setmainfont{texgyretermes-regular.otf}[BoldFont=texgyretermes-bold.otf,ItalicFont=texgyretermes-italic.otf,BoldItalicFont=texgyretermes-bolditalic.otf]
+\setsansfont{texgyreheros-regular.otf}[BoldFont=texgyreheros-bold.otf]
+\setmonofont{lmmono10-regular.otf}[Scale=MatchLowercase]
+\usepackage{amsmath,amssymb,graphicx,booktabs,tabularx,longtable,array,multirow}
+\usepackage[table]{xcolor}
+\usepackage{setspace,caption,float,placeins,enumitem,fancyhdr,titlesec,needspace,etoolbox}
+\usepackage[unicode,hidelinks]{hyperref}
+\usepackage{xurl,listings}
+\definecolor{Navy}{HTML}{17334D}
+\definecolor{Teal}{HTML}{167D8D}
+\definecolor{Pale}{HTML}{EEF4F7}
+\definecolor{Gray}{HTML}{546572}
+\definecolor{Gold}{HTML}{A56E28}
+\definecolor{LightGray}{HTML}{F4F6F8}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\code}[1]{{\small\nolinkurl{#1}}}
+\newcommand{\tabnote}[1]{\par\vspace{3pt}{\footnotesize\color{Gray}注：#1\par}}
+\newcommand{\fig}[4]{\begin{figure}[!htbp]\centering\includegraphics[width=#3\linewidth]{figures/#1.pdf}\caption{#2}\label{#4}\end{figure}}
+\newcommand{\status}[1]{\leavevmode\textcolor{Teal}{#1}}
+\newcommand{\pending}[1]{\leavevmode\textcolor{Gold}{#1}}
+\setstretch{1.5}
+\makeatletter
+\renewcommand\normalsize{\@setfontsize\normalsize{14bp}{16.8bp}}
+\makeatother
+\setlength{\parindent}{2em}
+\setlength{\parskip}{2pt}
+\setlength{\emergencystretch}{2em}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.22}
+\captionsetup{font=small,labelfont=bf,labelsep=quad,skip=8pt}
+\captionsetup[table]{position=top}
+\setlist{nosep,leftmargin=2em}
+\ctexset{section={format=\sffamily\bfseries\zihao{3}\color{Navy},name={,},number=\chinese{section},aftername=、,beforeskip=22pt,afterskip=10pt},subsection={format=\sffamily\bfseries\zihao{4}\color{Navy},beforeskip=16pt,afterskip=6pt},subsubsection={format=\bfseries\zihao{4},beforeskip=12pt,afterskip=4pt},contentsname={目\quad 录}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gray}智能科研助理系统\enspace /\enspace 模块五评测报告}
+\fancyhead[R]{\footnotesize\sffamily\color{Gray}成员 B}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,keepspaces=true,backgroundcolor=\color{LightGray},frame=single,rulecolor=\color{Pale},xleftmargin=0pt,aboveskip=9pt,belowskip=9pt}
+\pretocmd{\section}{\FloatBarrier\Needspace{7\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{7\baselineskip}}{}{}
+\AtBeginEnvironment{table}{\setstretch{1.1}}
+\AtBeginEnvironment{longtable}{\setstretch{1.1}}
+\hypersetup{pdftitle={智能科研助理系统：模块五评测与交付报告},pdfauthor={成员B（姓名待填）},pdfsubject={南京农业大学课程实践；55题Agent基线与495条检索实验}}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\thispagestyle{empty}
+\noindent{\sffamily\color{Navy}\zihao{2}\bfseries 南京农业大学}\par
+\noindent{\color{Gray}\zihao{4}智慧农业学院（人工智能学院）\quad 课程实践报告}\par
+\vspace{22mm}
+\noindent{\color{Teal}\rule{30mm}{2pt}}\par
+\vspace{7mm}
+\noindent{\sffamily\bfseries\color{Navy}\zihao{1}智能科研助理系统}\par
+\vspace{5mm}
+\noindent{\sffamily\bfseries\color{Navy}\zihao{2}模块五：系统评测与项目交付}\par
+\vspace{8mm}
+\noindent{\color{Gray}\large 55 题 Agent 基线\quad /\quad 495 条检索实验\quad /\quad 证据驱动分析}\par
+\vspace{19mm}
+\noindent\begin{tabularx}{\linewidth}{@{}L{30mm}Y@{}}
+\toprule
+课程 & 生产实习（1 学分）\\
+学年学期 & 2026--2027 学年第 1 学期\\
+负责成员 & B：\underline{\hspace{46mm}}（姓名待填）\\
+学号 / 班级 & \underline{\hspace{72mm}}\\
+指导教师 & \underline{\hspace{72mm}}\\
+报告日期 & 2026 年 10 月 14 日\\
+\bottomrule
+\end{tabularx}
+\vfill
+\noindent\begin{minipage}{\linewidth}\small\color{Gray}
+报告范围：整理成员 B 已完成的语料与评测集准备、实验组织、AI 辅助评分、检索参数分析与错误归因。质量评分尚待独立人工复核；生成/Agent 修复后的质量复测及全项目真实界面截图列为待验收项。姓名、学号等空白项由本人填写。
+\end{minipage}
+\end{titlepage}
+
+\pagenumbering{Roman}
+\hypersetup{pageanchor=true}
+\section*{摘\quad 要}
+\addcontentsline{toc}{section}{摘要}
+本报告依据课程实践方案与项目交付模板，记录成员 B 在模块五的阶段性工作。在去重后的 15 篇、296 个物理页的本地文献上，建立包含事实、对比、总结和推理四类的 55 题评测集，并完成 55 题 Agent 基线及 3 档递归字符分块长度、3 种检索方式组成的 495 条独立检索实验。评测保留失败样本、逐题时延、实际模型调用 Token、工具轨迹和运行来源；使用固定参考答案及原文证据开展 AI 辅助量表评分。
+
+Agent 基线有 53 题执行成功，自动工具集合匹配为 46/55；这两项均不代表答案正确率。正确性、完整性和引用准确性均分分别为 0.9818、0.8182、0.9636（满分 2）。在本次检索实验中，512 字符分块配合混合检索与重排获得 Hit@5=83.64\%、MRR@5=0.6245、Recall@5=72.73\%，平均查询耗时 1.7860 秒，适合作为后续固定基线。错误分析显示，工具选择、论文范围绑定以及证据到回答的忠实映射仍需改进。本报告提供可追溯的数据、矢量图表和复现说明，不将参数筛选或运行恢复误写为已完成的答案质量优化闭环。
+
+\noindent\textbf{关键词：}检索增强生成；Agent；页级证据评测；参数对比；AI 辅助评分；Bad Case
+\clearpage
+{\ctexset{section/format=\sffamily\bfseries\zihao{2}\color{Navy}}\tableofcontents}
+\clearpage
+\pagenumbering{arabic}
+
+\section{项目概述}
+\subsection{项目背景}
+科研文献数量持续增加，人工查找实验配置、比较方法和核验结论耗时较长。本项目构建基于本地论文知识库的智能科研助理，通过检索增强生成与工具调用，支持证据查询、论文比较及归纳推理。成员 B 负责以固定问题集检验检索、回答、引用与运行效率，为系统改进提供可复查依据。
+
+\subsection{目标与报告边界}
+模块五的核心目标是形成“数据准备—执行测量—答案审阅—错误分析—改进复测”的可追溯过程。本阶段完成前三项及错误分析，并形成检索参数选择依据与优化交接清单；修改后答案质量复测尚未完成。报告按交付模板的七章结构组织，其他模块只说明评测依赖与可观察状态，完整验收由对应负责人补齐。
+
+评测资料与报告整理使用了 AI 辅助，55 题质量分数来自 AI 对固定参考答案、实际回答、可见工具轨迹及原文页的审阅。它们不是独立人工实验，也不是教师评分。课程要求的人工评估仍需本人或独立评审者复核并签署记录。
+
+\subsection{实际技术栈}
+被测系统采用 Python、pdfplumber、Chroma、BM25、RRF 融合、BGE 嵌入与重排、Ollama 本地语言模型，以及 Streamlit 前端。评测层独立记录 JSONL、CSV 和 JSON，再由 Python/Matplotlib 生成统计图，以 LaTeX 组织报告。实验模型与主要配置见附录表\ref{tab:env}，不据此推断未实测的并发能力或部署能力。
+
+\section{团队分工说明}
+\begin{table}[H]
+\caption{团队约定分工与本报告归属}
+\centering\small
+\begin{tabularx}{\linewidth}{@{}L{13mm}L{18mm}Y L{25mm}r@{}}
+\toprule 成员 & 姓名 & 主要职责 & 对应模块 & 约定比例\\\midrule
+A & 待本人填写 & 前端交互、页面呈现和界面材料 & 模块四前端 & 15\%\\
+B & 待本人填写 & 评测集、实验运行、评分审阅、错误分析、交付文档 & 模块五 & 15\%\\
+C & 待本人填写 & 文档处理、分块、检索与 RAG 生成后端 & 模块一、二 & 35\%\\
+D & 待本人填写 & Agent 工具、路由与系统集成 & 模块三、四集成 & 35\%\\\bottomrule
+\end{tabularx}
+\tabnote{比例来自团队分工方案，合计 100\%，不等同于自动统计的实际代码贡献。本报告不代替其他成员的工作验收。}
+\end{table}
+
+成员 B 的实际工作包括：在 AI 辅助下整理与核验 15 篇语料和 55 题参考证据；在本地环境组织模型预检、正式运行与中断恢复；完成 9 组检索参数的结果对照；开展有审计记录的 AI 辅助评分；整理四类 Bad Case 及修复建议；冻结数据并制作本报告图表。检索与 Agent 业务代码分别作为 C、D 提供的被测依赖，不能因 B 运行了评测便将其实现归为 B 的独立开发成果。
+
+\clearpage
+\section{各模块交付物清单}
+\subsection{模块一：文档处理与检索}
+\begin{table}[H]\caption{模块一的评测依赖与验收边界}\small\centering
+\begin{tabularx}{\linewidth}{@{}L{35mm}L{25mm}Y@{}}\toprule 项目 & 观察状态 & 依据或待补事项\\\midrule
+PDF 加载与索引 & \status{已调用验证} & 15 篇共 296 页；512 档形成 2082 块。\\
+Word / TXT 加载 & \pending{待实现或核验} & 当前加载器为 PDF，不宣称已支持所有格式。\\
+分块与质量对比 & \status{部分完成} & 已测 recursive 的 256/512/1024 长度；三类分块策略质量比较待补。\\
+向量、混合、重排 & \status{已完成本轮} & 三档长度各 55 题 × 3 种检索，共 495 条。\\
+嵌入与向量库对比 & \pending{待完成} & 本轮固定 BGE 与 Chroma，未测 m3e/FAISS 对照。\\
+增量索引 & \pending{待核验/改进} & 当前建库全量重建；复用已有索引不是增量更新。\\\bottomrule\end{tabularx}
+\end{table}
+\subsection{模块二：RAG 生成}
+\begin{table}[H]\caption{模块二的评测依赖与验收边界}\small\centering
+\begin{tabularx}{\linewidth}{@{}L{35mm}L{25mm}Y@{}}\toprule 项目 & 观察状态 & 依据或待补事项\\\midrule
+上下文生成与引用 & \status{可调用，质量待改进} & Agent 调用了 RAG 工具；有引用错配和信息遗漏。\\
+解码参数实验 & \pending{待完成} & 未完成 temperature/top-p/top-k 的独立质量对照。\\
+真实流式与语义缓存 & \pending{未验证} & 前端逐字展示不能作为模型 Token 流式的证据。\\
+日志与异常恢复 & \status{部分验证} & 有真实调用、耗时及失败记录；完整降级验收由 C/D 补齐。\\\bottomrule\end{tabularx}
+\end{table}
+\subsection{模块三：Agent}
+\begin{table}[H]\caption{模块三的评测依赖与验收边界}\small\centering
+\begin{tabularx}{\linewidth}{@{}L{35mm}L{25mm}Y@{}}\toprule 项目 & 观察状态 & 依据或待补事项\\\midrule
+工具调用与 ReAct & \status{已评测基线} & 55 题中 27 题走 ReAct，28 题直接工具路由。\\
+工具数量与参数 & \status{部分完成} & 当前 7 类工具；课程 8 类目标及参数契约需负责人核验。\\
+错误恢复与论文绑定 & \pending{待修复复测} & F07/F12 抛出类型异常；存在论文范围误匹配。\\
+记忆与健康检查 & \pending{本轮未验收} & 本轮关闭跨题记忆；不能推断多轮记忆质量。\\\bottomrule\end{tabularx}
+\end{table}
+\subsection{模块四：集成与界面}
+\begin{table}[H]\caption{模块四的评测依赖与验收边界}\small\centering
+\begin{tabularx}{\linewidth}{@{}L{35mm}L{25mm}Y@{}}\toprule 项目 & 观察状态 & 依据或待补事项\\\midrule
+前端代码与服务接口 & \status{已交付代码} & 本报告不据文件存在推断全部页面已端到端验收。\\
+历史记录与核心交互 & \pending{待界面验收} & 需 A/D 在真实运行界面核验。\\
+3--5 张真实界面截图 & \pending{待补齐} & 模板 4.4.2 的全项目要求；本报告数据图不替代界面截图。\\\bottomrule\end{tabularx}
+\end{table}
+\subsection{模块五：系统评测与交付}
+\begin{table}[H]\caption{成员 B 的交付与尚待闭环事项}\small\centering
+\begin{tabularx}{\linewidth}{@{}L{37mm}L{23mm}Y@{}}\toprule 交付项 & 状态 & 可复查证据\\\midrule
+10--20 篇、50+ QA & \status{已完成} & 15 篇、55 题、四类问题与原文证据。\\
+检索质量与参数图表 & \status{已完成本轮} & 9 组配置、495 条结果与逐题指标。\\
+Agent 与效率基线 & \status{已完成本轮} & 55 题，保留 2 个执行失败及全部计量字段。\\
+质量评分 & \status{AI 辅助完成} & 55 题逐项评分、证据及审计；独立人工复核待补。\\
+四类 Bad Case & \status{已完成分析} & 检索/生成/引用/Agent 多标签与代表案例。\\
+质量优化前后复测 & \pending{待完成} & 已形成 C/D 交接建议，尚无修复后 55 题结果。\\
+技术与使用说明 & \status{本报告已整理} & 设计、复现命令、结果说明与源文件。\\\bottomrule\end{tabularx}
+\end{table}
+\FloatBarrier
+
+\section{技术实现记录}
+\subsection{模块一：文档与索引接口}
+本轮从项目论文目录筛选文献，剔除同文重复版本与主题外指南，冻结 PDF 文件名和 SHA-256。物理页码从 1 开始，避免印刷页码与 PDF 顺序页混淆。索引流程采用文本提取、递归字符分块、BGE 嵌入、Chroma 存储，再组装 BM25 和融合检索。512 档复用了经过文本、页码、块 ID 与嵌入配置验证的 2082 个已有块；其建库时间不与新建索引直接比较。
+
+\subsection{模块二：生成与计量接口}
+回答链路使用 Ollama 的 \code{qwen2.5:7b}。调用级 Token 计数聚合实际返回的 prompt/completion 字段；单题若存在未完整计量的调用，不将缺失值伪装为零。本轮 55 题 Token 覆盖率为 100\%。预热、索引组装与模型加载耗时不并入逐题问答时延。各工具保留原有解码配置，本报告不将预检温度或某一路生成温度称为全链路统一参数。
+
+\subsection{模块三：Agent 执行与轨迹}
+系统根据规则直接调用工具，或进入 ReAct 循环。评测记录实际工具集合、参数、返回状态、执行模式和步数。\code{success=True} 仅表示后端声明执行成功；S10 等题可能只返回诊断性文本，因此必须再检查回答内容。自动工具集合匹配与 AI 对参数及任务意图的路由判断分开统计，避免把两个定义不同的指标混为一个准确率。
+
+\subsection{模块四：集成与截图材料}
+本阶段通过脚本调用实际后端完成基线。图\ref{fig:architecture}为代码依赖及评测数据流示意，不是界面截图。模板要求的真实截图应由 A/D 在系统运行时补充，建议覆盖文献加载、带引用问答、论文比较、工具轨迹及历史记录，并标注核心区域。本报告没有将模拟网页或数据统计图充作该项证据。
+
+\fig{08_architecture}{被测系统与成员 B 评测流水线。架构示意图；实线表示调用或数据传递，评测层负责冻结输入、计量与审阅。}{1}{fig:architecture}
+\FloatBarrier
+
+\subsection{模块五：评测集与实验设计}
+\subsubsection{数据集构建与覆盖}
+语料为视觉表征、语义分割及视觉应用研究，另纳入作为 Transformer 理论基础的 \emph{Attention Is All You Need}，不将 15 篇都称为视觉应用论文。构造事实 20 题、对比 15 题、总结 10 题、推理 10 题。每题保存 ID、问题、参考答案、证据 PDF/物理页/摘录、可接受工具集合；共核验 142 条证据记录。论文题名与页数见附录表\ref{tab:corpus}。
+
+为保持任务独立性，本轮关闭跨题会话记忆。Agent 各题只执行一次正式基线；三档分块各完成向量、混合、混合加重排三种检索。所有检索配置使用相同 55 题、相同语料与相同后端指纹。图\ref{fig:dataset}中的论文覆盖按题目引用的金标证据去重统计；一题可覆盖多篇论文，因此论文列的计数之和可以大于 55。
+\fig{01_dataset_profile}{评测集结构与论文证据覆盖。四类问题共 55 题；P01--P15 的题名对应附录清单。覆盖数量表示关联题数，不是独立问题总数。}{1}{fig:dataset}
+
+\subsubsection{检索指标定义}
+设第 $i$ 题的去重金标证据页集合为 $G_i$，前 5 个检索块对应页的集合为 $P_i^{(5)}$，$r_i$ 为前 5 名中首次命中金标页的块排名。证据单位为“精确 PDF 文件名 + 物理页”。
+\begin{align}
+\mathrm{Hit@5}&=\frac1N\sum_{i=1}^{N}\mathbf{1}[G_i\cap P_i^{(5)}\neq\varnothing],\\
+\mathrm{MRR@5}&=\frac1N\sum_{i=1}^{N}\begin{cases}1/r_i,&r_i\leq5,\\0,&\text{前五名无命中},\end{cases}\\
+\mathrm{Recall@5}&=\frac1N\sum_{i=1}^{N}\frac{|G_i\cap P_i^{(5)}|}{|G_i|}.
+\end{align}
+重复同页块不增加 Recall 的已覆盖证据页数，MRR 仍按块的原始排名计算。页级命中不证明整页已进入模型上下文，也不证明答案结论正确。Agent 汇总引用可能来自多次工具调用，没有统一 Top-5 排名，因而其检索三指标为 N/A；下文检索成绩全部来自独立 retrieval 模式。
+
+\subsubsection{固定条件与测量边界}
+本轮均使用 recursive 字符分块，长度参数为 256/512/1024，overlap 参数为 50，候选召回 20、最终 Top-5。当前实现不保证每一对输出块都有恰好 50 字符重叠，因此不把配置值解释为实际重叠量保证。嵌入及重排在 CPU 执行，语言模型由 Ollama 管理设备；本报告没有连续 GPU 利用率测量。
+
+55 题 Agent 基线属于中断后续跑：先前已落盘的 23 题保留原始回答、计时与 Token，后续运行执行余下 32 题，各题记录来源。早期异常运行、预检和 3 题冒烟结果不计入正式 55 题。不能用最后一段进程起止时间代表整轮耗时。三档检索都是单次顺序运行，没有重复采样、误差棒或显著性检验。
+
+\subsection{检索参数实验结果}
+\begin{table}[H]\caption{九组检索配置的总体表现（每组 $n=55$）}\label{tab:retrieval}\centering\small
+\input{tables/01_retrieval.tex}
+\tabnote{V=向量，H=混合，H+R=混合加重排。查询时延不含建库；512 档复用已有索引。}
+\end{table}
+\fig{02_retrieval_quality}{三档分块长度与三种检索方式的质量比较。相同题集与金标页定义下，分别展示 Hit@5、MRR@5、Recall@5；未绘制未经重复实验估计的误差棒。}{1}{fig:retrievalquality}
+
+512+H+R 命中 46/55 题，相对同长度向量检索的 39/55 多命中 7 题，Hit@5 增加 12.73 个百分点；Recall@5 从 59.85\% 增至 72.73\%。重排提高了本轮证据覆盖，但查询时延从 0.1416 秒增至 1.7860 秒。混合本身并不在所有配置和指标上优于向量：512 档两者命中数相同，而混合 Recall 略低，应保留这一结果。
+
+1024+H+R 同样命中 46 题，但 MRR 为 0.5921，Recall 为 71.36\%，平均 3.2577 秒。512 档在命中数相同的情况下排名与覆盖更好，耗时约少 45.2\%。256+H+R 更快，但少命中 4 题。故 512+H+R 是本数据集上合理的后续固定基线；这一判断不是对所有任务的通用最优证明。
+\fig{03_retrieval_tradeoff}{检索质量、查询时延与索引规模。时延仅比较查询过程；块数刻画索引规模，不用复用索引的零建库时间制造速度优势。}{1}{fig:tradeoff}
+\fig{04_paired_hits}{相同 55 题在九组配置中的逐题命中情况。每格为该题是否至少命中一个金标证据页；分组展示四类任务，便于定位总体均值掩盖的差异。}{0.94}{fig:paired}
+\FloatBarrier
+
+\subsection{Agent 效率与工具表现}
+\begin{table}[H]\caption{55 题 Agent 基线：执行、工具和效率指标}\label{tab:agent}\centering\small
+\input{tables/02_agent.tex}
+\tabnote{失败题保留在总体分母与计量中；ReAct 步数只对其 27 题求均值。模式间时延差异受题目类型影响，不能当作同题随机对照。}
+\end{table}
+53/55 的执行成功率为 96.36\%，但执行完成并不能推导内容正确。自动工具集合匹配为 46/55（83.64\%），AI 结合意图及参数审阅后的路由有效为 45/55（81.82\%）；例如 S09 可接受语义上的论文比较，但预标注集合不含该工具，两个口径可能不同。保持原始标注不变，同时保留差异解释。
+
+逐题平均墙钟时延为 64.0958 秒，P95 为 168.3460 秒，平均实际调用 Token 为 4394.6。直接工具路由 28 题平均 102.3914 秒，ReAct 27 题平均 24.3818 秒；对比类任务全部走直接工具路径，题目组成不同，不能据此声称 ReAct 本身必然更快。总体平均步数 1.2，ReAct 子集平均 1.4074，后者才适合描述实际循环推理步数。
+\fig{05_agent_performance}{Agent 的逐题效率分布与实际 Token 消耗。保留失败样本，按类别和执行模式展示；每个点表示一个问题，模式对比为观察性描述。}{1}{fig:agent}
+
+\subsection{AI 辅助量表评分}
+\subsubsection{评分规则与溯源}
+正确性、完整性、引用准确性各按 0/1/2 评分，分别表示核心无效、部分满足、完整满足相应标准。正确性关注关键事实与内部矛盾；完整性关注所问要点覆盖；引用准确性关注实际返回的文件/页能否支持表述。路由采用 0/1，检查工具意图及关键参数。评分参考固定参考答案与真实原文，不只看最终一句是否包含目标数字；执行失败按无有效回答处理。
+
+评分文件记录逐题原因、核对页及不确定性。C01 的“无归纳偏置”绝对化表述被复核为部分正确；C14 虽错误绑定 Vision Mamba，ResNet 部分仍有真实支持，因此三个量表均为 1，而非全部归零。F11 的“最多重试三次/总共尝试三次”在原论文摘要与正文存在表述差异，保留不确定性，不额外据此扣分。原始回答、参考答案和运行元数据没有为获得更好成绩而改写。
+
+\begin{table}[H]\caption{四类问题的 AI 辅助质量评分（各质量维度满分 2）}\label{tab:scores}\centering\small
+\input{tables/03_scores.tex}
+\tabnote{全部 55 题均有评分；“路由”是 AI 语义判断的 0/1 比例。结果尚待独立人工复核，量表均分不是二元答案正确率。}
+\end{table}
+\fig{06_ai_quality}{AI 辅助评分分布与分任务均值。正确性、完整性、引用准确性均为 0--2 量表；不将其标为独立人工实验或自动正确率。}{1}{fig:ai}
+
+总体正确性、完整性和引用准确性分别为 0.9818/2、0.8182/2、0.9636/2。完整性是三个量表中的最低项。事实类部分题被错误送入元数据工具，导致实验数值或配置缺失；对比类虽工具集合匹配较高，仍会因论文绑定错误或只回答一部分要点而失分。推理类表现相对较好，但样本仅 10 题，不能据此推广到所有推理任务。
+
+\subsection{Bad Case 分析与优化交接}
+四类错误采用可重叠标签：检索 10 题、生成 39 题、引用 42 题、Agent 11 题，均来自 AI 辅助诊断。相加为 102 次标签，而非 102 个独立失败题。某题可同时出现范围错配、错误生成与引用不支持；图\ref{fig:badcases}因此采用计数和共现矩阵，不将四类绘成互斥饼图。
+\fig{07_bad_cases}{四类 Bad Case 的多标签计数与共现。对角线为各类涉及题数，非对角线为两类共同涉及的题数；标签表达审阅判断，不单独证明模型内部因果。}{1}{fig:badcases}
+\begin{table}[H]\caption{代表性问题、可见证据与下一步处理}\label{tab:cases}\centering\small
+\input{tables/04_cases.tex}
+\tabnote{案例均保留原回答及轨迹；原文页出现在 sources 中，只证明页级可见支持，不能还原未记录的全部内部上下文。}
+\end{table}
+
+优先改进顺序为：第一，修复 \code{paper_metadata} 的结构化作者字段拼接异常，并将实验结果、训练配置等事实查询路由到证据检索；第二，为论文比较与总结加入显式文献 ID 绑定，防止 Vision Mamba 指向语义分割基准论文；第三，检查回答要点覆盖与数值语境，避免把测试集集成结果改写为验证集单模型结果；第四，引用生成前核验结论与证据的一致性，并对纯诊断性文本设置任务完成检查。
+
+修复应由 C/D 在各自代码中实施，B 使用同一 55 题和固定基线重新运行，保留新版哈希、逐题评分与错误迁移表。当前没有该轮结果，因此本报告没有虚构优化后数值，也没有把本轮长度参数筛选替代课程要求的答案质量优化前后对照。
+\FloatBarrier
+
+\section{技术设计文档}
+\subsection{评测数据契约与输出结构}
+QA 输入以 JSONL 一行一题，核心字段为 \code{id/category/question/reference_answer/gold_evidence/accepted_tool_sets}。gold 包含 \code{source/page/evidence}，文件名与物理页组成严格匹配单位。运行结果补充 \code{success/answer/sources/tools_used/steps/execution_mode/wall_latency_s/token_usage}，原始轨迹保存在嵌套对象中。
+
+每次正式运行创建独立目录，包含参数及指纹元数据、QA 快照、逐题结果、审阅表和汇总。自动指标从逐题结果重新计算；量表评分与其来源另存审计，防止未经评分的旧汇总与新版混用。报告包的 \code{data/report_data.json} 冻结 55 题 Agent、495 条检索、评分与语料记录，图表脚本只消费该快照，不调用模型。
+
+\subsection{可追溯性与续跑设计}
+可比性由 QA/语料 SHA-256、后端文件指纹、模型名、包版本与配置共同约束。续跑采用新输出目录，按题 ID 去重复制已落盘结果，仅执行缺失题，并保留 \code{origin_run_id}。索引复用需验证语料、分块与嵌入配置以及已存块的文本/页码/ID，而不是仅检查“目录存在”。对历史片段未保存的模型快照或计量脚本指纹，明确保留不可追溯边界，不事后伪造。
+
+\subsection{运行异常与工程改进记录}
+\begin{table}[H]\caption{本地运行异常及已实施的评测工程处理}\small\centering
+\begin{tabularx}{\linewidth}{@{}L{27mm}Y Y@{}}\toprule 现象 & 可见证据与处理 & 验证边界\\\midrule
+模型缺失 / 显存分配失败 & 预检 Ollama 模型和连接；重用合格索引，避免失败后重复嵌入；固定上下文配置。 & 预热成功只说明可调用，不代表答案正确。\\
+Python 原生进程退出 & Windows 事件记录涉及 \code{c10.dll} 访问异常；加无缓冲输出、故障日志、逐题检查点与续跑。 & 不能仅据退出位置认定模型显存是根因。\\
+WinError 5 文件替换失败 & 独立临时文件、有限重试与退避，保留耐久元数据快照及修订号；逐题结果刷盘。 & 文件锁故障注入验证写入与恢复，不是模型质量提升。\\\bottomrule\end{tabularx}
+\end{table}
+这些改进服务于结果完整性与长任务可恢复性，是实际完成的工程稳定性工作；课程要求的生成/Agent 质量改进仍需以修复后的同题复测证明。不得把模拟故障注入的 55 条流程记录当作真实 55 题模型质量数据。
+
+\subsection{图表与报告生成设计}
+图采用一致的深蓝、青绿与赭色系统，全部同时导出矢量 PDF 和高分辨率 PNG。使用分面比较、逐题矩阵、分布图、散点图及共现矩阵，分别回答“总体差异、个体差异、效率代价与错误关联”。不使用无重复实验依据的误差棒、显著性标记或推测的优化曲线。表采用三线表、统一单位与小数精度，逐题明细使用跨页续表；图表数值均可从冻结 JSON 重建。
+
+\section{总结与展望}
+\subsection{已完成成果与主要认识}
+本阶段形成了 15 篇论文、296 页、55 题四类问答的基准，完成真实 Agent 基线、495 条检索记录、AI 辅助评分与四类错误分析，并通过运行来源、哈希及独立目录维持可追溯性。在此样本上，512 字符配合混合检索加重排兼顾页级质量与耗时；Agent 的主要改进空间集中于完整性、文献绑定与引用支持，执行成功和工具集合匹配不足以代表答案可用。
+
+报告交付包括一份可编辑 LaTeX 主文件、八组矢量与位图图形、七个数据表片段、冻结数据及复现脚本。成员 B 的工作价值在于提供能够复查的基线和具体修复入口，而不是以单一高分掩盖失败样本。
+
+\subsection{课程验收前的后续工作}
+\begin{table}[H]\caption{待补事项与建议验收产物}\small\centering
+\begin{tabularx}{\linewidth}{@{}L{40mm}L{22mm}Y@{}}\toprule 待补工作 & 建议责任 & 可验收产物\\\midrule
+独立人工复核 55 题 & B 组织 & 评分者、日期、逐题理由、争议处理与签字记录。\\
+路由、异常与论文绑定修复 & C/D 实施，B 复测 & 新版代码指纹、同题新运行、优化前后指标及 Bad Case 迁移。\\
+三类分块策略质量比较 & C 实现，B 测量 & 固定语料与题集的 fixed/recursive/semantic 检索质量表。\\
+真实界面截图 3--5 张 & A/D & 运行界面及核心区域标注，覆盖实际核心功能。\\
+其余模块课程要求 & 对应负责人 & 多格式、嵌入/向量库对照、真实流式等逐项验收材料。\\\bottomrule\end{tabularx}
+\end{table}
+所有下一轮对照应固定题集与评分规则，失败保留在分母中，旧基线只读保存。若改变语料、模型或金标，应另建实验版本并解释变化，不能直接把不同条件下的得分当作修复收益。
+\FloatBarrier
+
+\section{附录}
+\subsection{环境与关键配置}
+\begin{table}[H]\caption{正式运行记录的环境与配置}\label{tab:env}\centering\small
+\input{tables/06_environment.tex}
+\tabnote{模型名和版本取自运行元数据；CPU 指嵌入与重排设备，不能解释为 Ollama 全链路只用 CPU。}
+\end{table}
+
+\subsection{独立报告文件夹与编译}
+本目录可以整体复制，编译仅依赖目录内的图表文件与常规 LaTeX 环境；重建图表需要 Python、NumPy 与 Matplotlib，不需要再次调用 Ollama。\code{README.md} 说明脚本入口和字体回退。推荐用 XeLaTeX 编译两次：
+\begin{lstlisting}
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+\end{lstlisting}
+报告源文件中的姓名、学号、班级、教师栏位应在提交前填写；填完后重新编译。若使用便携 Tectonic，可执行 \code{tectonic main.tex}。附带 PDF 是本次生成的阅读版本，编辑以 \code{main.tex} 为准。
+
+\subsection{本地实验复现命令}
+下列命令在原项目根目录执行，要求使用已安装项目依赖和模型的 NLP 环境。验证与汇总不会重新生成回答；正式运行会调用本地模型并写入新目录。不要覆盖原始基线。
+\begin{lstlisting}
+# PowerShell: start in the original rag_project directory
+$py = "D:\Anaconda\envs\NLP\python.exe"
+& $py scripts\module5_eval.py check `
+  --qa evaluation\qa.jsonl --data evaluation\corpus
+
+# New Agent run; use a new output directory for each experiment
+$stamp = Get-Date -Format "yyyyMMdd_HHmmss"
+& $py scripts\module5_eval.py run `
+  --mode agent --qa evaluation\qa.jsonl `
+  --data evaluation\corpus --chunk-size 512 `
+  --out "evaluation\runs\agent55_new_$stamp" --verbose
+
+# Independent retrieval experiment; runs all three retrieval methods
+$stamp = Get-Date -Format "yyyyMMdd_HHmmss"
+& $py scripts\module5_eval.py run `
+  --mode retrieval --qa evaluation\qa.jsonl `
+  --data evaluation\corpus --chunk-size 512 `
+  --out "evaluation\runs\retrieval55_new_$stamp" --verbose
+\end{lstlisting}
+256 与 1024 档仅更换 \code{--chunk-size} 并指定新目录。索引复用及续跑的参数和检查由脚本 \code{--help} 给出，不能跳过配置一致性验证。新模型运行不会自动生成独立人工评分；原 AI 评分也不能直接移植给新版回答。
+
+\subsection{原始记录与数据来源}
+原项目的主要代码结构如下，按实际文件整理；省略缓存、向量存储与临时日志，不照抄模板中的示例代码树。
+\begin{lstlisting}
+rag_project/
+  app.py
+  src/
+    data_loader/    # PDF parsing
+    chunking/       # chunkers and size statistics
+    retrieval/      # Chroma, BM25, hybrid, reranker
+    generation/     # RAG pipeline
+    agent/          # router, tools, ReAct, memory
+    frontend/       # service and UI state
+  scripts/
+    module5_eval.py
+    module5_tokens.py
+    module5_charts.py
+    run55.py
+  evaluation/       # QA, corpus manifest, run records
+  docs/
+  tests/
+  B_Module5_Report_20261014/
+\end{lstlisting}
+\begin{table}[H]\caption{报告主要数据来源（均在原项目 evaluation 下）}\small\centering
+\begin{tabularx}{\linewidth}{@{}L{27mm}Y@{}}\toprule 记录 & 相对目录或文件\\\midrule
+QA 与语料 & \code{qa.jsonl}，\code{corpus_manifest.json}\\
+Agent 基线 & \code{runs/agent55_20261014_175735_da23d1/}\\
+AI 辅助评分 & \code{ai_review_20261014_191222/scores_audit.json}\\
+评分后汇总 & \code{ai_review_20261014_191222/summary/summary.json}\\
+256 检索 & \code{runs/retrieval55_20261014_210831_0865ca/}\\
+512 检索 & \code{runs/retrieval55_20261014_193104_b35edd/}\\
+1024 检索 & \code{runs/retrieval55_20261014_212257_280fb9/}\\
+配置汇总 & \code{retrieval_comparison_20261014_214329/comparison.json}\\\bottomrule\end{tabularx}
+\end{table}
+完整 SHA-256 及元数据见本包 \code{data/source_manifest.json}。为保持交付轻量，未复制约百兆字节的原始论文 PDF；参考摘录与页码保留在 QA 中，原论文仍由原项目 \code{evaluation/corpus} 提供。验证原始数据需使用该语料，阅读和编译报告不依赖它。
+
+\subsection{依据文档}
+本报告结构与验收边界参考用户提供的《南京农业大学课程实践.docx》与《项目交付模板.docx》；成员比例参考团队分工材料。报告中的所有实验结论以本地冻结记录为依据。八张图均为本次数据绘制或代码依赖示意，不是原论文插图，也不替代模板要求的真实界面截图。
+
+\subsection{文献清单}
+以下题名经本地 PDF 第一页文本与评测资料核对，页数为物理页。P 编号同时用于覆盖图；本表不补造未经核验的作者、出版年份或 DOI。
+\begingroup\small
+\input{tables/07_corpus.tex}
+\endgroup
+
+\subsection{55 题评分明细}
+三列质量分数依次为正确性、完整性和引用准确性（0--2）；AI 路由为 0/1 的语义判断；自动匹配为固定可接受工具集合匹配。详细问题、参考答案与逐题理由分别见 \code{data/qa.jsonl} 和 \code{data/scores_audit.json}。全部评分仍需独立人工复核。
+\begingroup\small
+\input{tables/05_questions.tex}
+\endgroup
+
+\end{document}

@@ -1,0 +1,188 @@
+{
+  "scope": "55 questions x 3 retrieval methods x 3 recursive character chunk sizes",
+  "rows": 495,
+  "failures": 0,
+  "inputs": [
+    {
+      "chunk_size": 256,
+      "directory": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\retrieval55_20261014_210831_0865ca",
+      "chunk_count": 4335,
+      "metadata_file": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\retrieval55_20261014_210831_0865ca\\metadata.json",
+      "metadata_sha256": "56659b4a31191affa3211f666a5940cf54613ea079d749e7c56eefb56139d6ae",
+      "results_sha256": "c55739e47c794fa422bde0f96ada411cfdcf6daf952de19a5e6f5c6393c0469e",
+      "summary_sha256": "64e254432ae04f7687e1e4bd2d70a1327b6a3833b13fcd028318709cf4ef2236",
+      "index_reused": false,
+      "build_index_s": 657.9015218999999
+    },
+    {
+      "chunk_size": 512,
+      "directory": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\retrieval55_20261014_193104_b35edd",
+      "chunk_count": 2082,
+      "metadata_file": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\retrieval55_20261014_193104_b35edd\\metadata.json",
+      "metadata_sha256": "8768eea8e6414578a37a5cdd3f90fbde4737c577e6bddcf68401088208962cd0",
+      "results_sha256": "676e3cbc68f07483e9b3ec1bc68deedc4fde28049755a2d10c26700d663c7d95",
+      "summary_sha256": "086b630d62bfcd8074075ca64baec12def8af54d1fecb8500639f068581738cf",
+      "index_reused": true,
+      "build_index_s": 0.0
+    },
+    {
+      "chunk_size": 1024,
+      "directory": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\retrieval55_20261014_212257_280fb9",
+      "chunk_count": 1079,
+      "metadata_file": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\retrieval55_20261014_212257_280fb9\\metadata.json",
+      "metadata_sha256": "6381e551ca080c7e24f40be20e702dd04fc4c1bcfd7762b654dfd70ed51f7c9f",
+      "results_sha256": "0b289383788f057768c410f9c86caeb045551783742cf6e8a328ac6b1c44191e",
+      "summary_sha256": "cc8e20cab6ccea207dae75a1fab639cd4c5d21e9b839b34ced091774d773c674",
+      "index_reused": false,
+      "build_index_s": 653.6852551
+    }
+  ],
+  "controlled_fingerprint": {
+    "qa": "67fb86f8ca410d68859a03e850526d35ca201d0513ea7dc80b946a259b241582",
+    "corpus": "6306dd225f7dad1926a6b763c9be3385e5ff2d52bb7680db746799767c1e897b",
+    "backend": {
+      "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/agent/__init__.py": "0bd62d3e0d9a0c80fd732f2829a1be867bd1113c8a21858af27f8478b8b5b95d",
+      "src/agent/agent.py": "b4e886d40a7649b76455fa4feb79666d38eb36fd186fce9ee980ed2c2e16d62b",
+      "src/agent/health.py": "0f313695450c1c106a02725713815c85f8fa55aaacd2fc4d6fc4eae63e80f756",
+      "src/agent/llm_client.py": "4885974396419fae64a60e97cdbc91d870092efa3aab17b9b75990c2e3528c1b",
+      "src/agent/memory.py": "0a29280e86fab187cca257e7bd82d7e6934e94a9edefea3f230e844871216811",
+      "src/agent/observability.py": "6290999d9003ced29a8fd4c8e6a69d67ab91136dbcddedc941e5df5b83e06c34",
+      "src/agent/paper_compare.py": "4753d01c1a62f8186e97904ea6bd0c32c093b111e647b0424f2ad179b3c2555d",
+      "src/agent/paper_scope.py": "c437b06f8d7524d0b709867d81183e3f8820fed7bd16aeeab0a5dc350a977f32",
+      "src/agent/prompts.py": "a92235084bc3ebbc621ce83da5bd50fa1ee4e4bd6f3ca74534a444302e2ffb5d",
+      "src/agent/react_loop.py": "510ecd6086d758a9ffab9dc340ef11652d2ed1aafa54b6e65d2743510657258e",
+      "src/agent/router.py": "0f4de48c9924674ed64cc937aea7f6d9d3c4b468c0ac76008ee953816624b255",
+      "src/agent/tools.py": "5d7034becb4dc4720a1df5c663d44d16a6fe9186ebce56028531fdab11849a78",
+      "src/chunking/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/chunking/chunker.py": "6d5857c878c9a53cee6a8617c71ad3533418b3abea89d360e98879dca57bd01d",
+      "src/chunking/experiment.py": "a2d68afa13271032e1dce5dd1c70a50f546f44d52a8e2dd4c8a04f766f6b8ea1",
+      "src/config.py": "9d634460a67dd85d4645cbe08b26eb03102bb079772641260608592f94fd3567",
+      "src/data_loader/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/data_loader/pdf_loader.py": "06c89fe56db766ff3c05fa19e45cb85472ce31f62f1befbb2bb4457b496523d8",
+      "src/frontend/__init__.py": "21a0b66398e6ec1d1ceaabb477bdf9744efba9b8df5be2c29907e8fe1f0cb628",
+      "src/frontend/service.py": "73b295947aa5adb7f09d24981830027505527cdd51b72c4d2211460fdd17d4f2",
+      "src/frontend/state.py": "4cea7918630d4cc15d388bc32d7e08673ef98f9f6fdada9f0cc420607fe4dee7",
+      "src/generation/__init__.py": "f73cf7d8ebda13f23cc5ad3b7e5eb416704a3150bbf6e61b95cc90d7bddd8727",
+      "src/generation/rag_pipeline.py": "5a3a6baeac0c930ea6f63b89a7aa359d20d004adef0ab01997fa6e59e7edd6c7",
+      "src/retrieval/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/retrieval/bm25_retriever.py": "511e653a3633f0baa59c945256841e8e77c232a69a446397dd189fbce9a4d6c9",
+      "src/retrieval/hybrid_retriever.py": "8c37b74cc06f2337f07334111dd05e3685f62ad885e12130ff13bd8e3de84ffb",
+      "src/retrieval/reranker.py": "eec79a8b62fe0012e14d7433c4c6fb3939b23acefcd16bc4722afc1e5283c009",
+      "src/retrieval/vector_store.py": "90e09084378139c4db833e23bb92b1f38cdb8f9b1e8ad75b5a9d03be98277010"
+    },
+    "packages": {
+      "torch": "2.11.0+cu126",
+      "chromadb": "1.5.9",
+      "sentence-transformers": "6.1.0",
+      "rank-bm25": "0.2.2",
+      "pdfplumber": "0.11.10",
+      "ollama": "0.6.3",
+      "streamlit": "1.65.0"
+    },
+    "python": "3.10.20 | packaged by Anaconda, Inc. | (main, Mar 11 2026, 17:42:35) [MSC v.1942 64 bit (AMD64)]",
+    "embedding": "BAAI/bge-large-zh-v1.5",
+    "reranker": "BAAI/bge-reranker-base",
+    "device": "cpu"
+  },
+  "overall": [
+    {
+      "chunk_size": 256,
+      "method": "vector",
+      "n": 55,
+      "hit_count": 38,
+      "hit_at_5": 0.6909090909090909,
+      "mrr_at_5": 0.5496969696969697,
+      "recall_at_5": 0.5757575757575758,
+      "avg_wall_latency_s": 0.16254323636363635
+    },
+    {
+      "chunk_size": 256,
+      "method": "hybrid",
+      "n": 55,
+      "hit_count": 40,
+      "hit_at_5": 0.7272727272727273,
+      "mrr_at_5": 0.5745454545454546,
+      "recall_at_5": 0.5924242424242424,
+      "avg_wall_latency_s": 0.19213465454545453
+    },
+    {
+      "chunk_size": 256,
+      "method": "hybrid_rerank",
+      "n": 55,
+      "hit_count": 42,
+      "hit_at_5": 0.7636363636363637,
+      "mrr_at_5": 0.5906060606060606,
+      "recall_at_5": 0.6424242424242425,
+      "avg_wall_latency_s": 1.3116201818181819
+    },
+    {
+      "chunk_size": 512,
+      "method": "vector",
+      "n": 55,
+      "hit_count": 39,
+      "hit_at_5": 0.7090909090909091,
+      "mrr_at_5": 0.576060606060606,
+      "recall_at_5": 0.5984848484848485,
+      "avg_wall_latency_s": 0.1415740909090909
+    },
+    {
+      "chunk_size": 512,
+      "method": "hybrid",
+      "n": 55,
+      "hit_count": 39,
+      "hit_at_5": 0.7090909090909091,
+      "mrr_at_5": 0.5869696969696969,
+      "recall_at_5": 0.5803030303030303,
+      "avg_wall_latency_s": 0.14763474545454544
+    },
+    {
+      "chunk_size": 512,
+      "method": "hybrid_rerank",
+      "n": 55,
+      "hit_count": 46,
+      "hit_at_5": 0.8363636363636363,
+      "mrr_at_5": 0.6245454545454545,
+      "recall_at_5": 0.7272727272727273,
+      "avg_wall_latency_s": 1.7860252363636364
+    },
+    {
+      "chunk_size": 1024,
+      "method": "vector",
+      "n": 55,
+      "hit_count": 40,
+      "hit_at_5": 0.7272727272727273,
+      "mrr_at_5": 0.5496969696969697,
+      "recall_at_5": 0.5712121212121212,
+      "avg_wall_latency_s": 0.1587358
+    },
+    {
+      "chunk_size": 1024,
+      "method": "hybrid",
+      "n": 55,
+      "hit_count": 42,
+      "hit_at_5": 0.7636363636363637,
+      "mrr_at_5": 0.6096969696969697,
+      "recall_at_5": 0.6196969696969697,
+      "avg_wall_latency_s": 0.16429527272727273
+    },
+    {
+      "chunk_size": 1024,
+      "method": "hybrid_rerank",
+      "n": 55,
+      "hit_count": 46,
+      "hit_at_5": 0.8363636363636363,
+      "mrr_at_5": 0.5921212121212122,
+      "recall_at_5": 0.7136363636363636,
+      "avg_wall_latency_s": 3.2577220363636363
+    }
+  ],
+  "metric_unit": "Exact PDF filename + one-based physical page, top 5 chunks, deduplicated gold pages",
+  "limitations": [
+    "All three sizes use recursive character chunking; this is not a fixed/recursive/semantic strategy comparison.",
+    "overlap parameter is 50; the current recursive implementation does not guarantee 50-character overlap between every pair of emitted chunks.",
+    "512 reuses an index; build_index_s=0 cannot be compared as new-index construction speed.",
+    "Single serial CPU run per configuration on 55 questions; no claim of statistical significance or universal optimality.",
+    "Retrieval quality does not establish answer correctness or completion of a generation/Agent optimization experiment."
+  ]
+}

@@ -6,3 +6,8 @@ __pycache__/
 data/.trash/
 vector_store/
 logs/agent_requests.jsonl
+evaluation/corpus/
+evaluation/logs/
+*.aux
+*.toc
+*.synctex.gz

@@ -1,0 +1,1494 @@
+{
+  "assessment_type": "AI-assisted evidence-based rubric assessment",
+  "independent_human_review": false,
+  "assessed_at": "2026-10-14T19:12:22+08:00",
+  "run_directory": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\agent55_20261014_175735_da23d1",
+  "question_count": 55,
+  "sources_sha256": {
+    "results.jsonl": "314bd3deaec7cc6811493ed2cefc825617e0cd2af6209087240be820261d4c16",
+    "metadata.json": "40396ccfb173c5ceded0b596bd3b03ad4946330f03160f480e82a9191fd59a84",
+    "qa_snapshot.jsonl": "67fb86f8ca410d68859a03e850526d35ca201d0513ea7dc80b946a259b241582",
+    "review.csv": "fd89c3c5267867e65999a6cdd2359478dc8ada9355bc99b3edc5695b2acb833d"
+  },
+  "method": "分组通读实际回答、预先固定的参考答案/证据、可见sources与trace，并核验论文物理页；对边界题交叉复核。不是独立人工实验。",
+  "rubric": {
+    "correctness": "2=相关关键事实无实质错误；1=有部分正确核心信息但存在实质错误/矛盾；0=核心错误、无相关有效回答或请求失败。",
+    "completeness": "2=覆盖全部主要必答点；1=回答部分主要点；0=主要必答内容缺失。遗漏本身不必同时降低正确性。",
+    "citation_accuracy": "2=输出sources所列文件/物理页支持已表达的关键结论；1=部分支持或部分主张有误/无据；0=无关键有效支持、主要错论文或无有效答案。可以接受不同于金标页但实际支持结论的页。",
+    "routing": "1=实际工具及传参符合任务；0=误路由或实质参数偏移。与自动工具集合匹配独立；内部论文匹配错误不自动判工具选择错误。"
+  },
+  "limitations": [
+    "AI辅助判断有主观性，未声明经独立人工复核。",
+    "部分内部chunk文本没有保存在原结果中；只评价可见引用/trace，不把页级命中等同于模型见到整页。",
+    "多标签Bad Case计数可以重叠，不能相加作为失败题数。",
+    "F11参考答案依摘要的三次重试，正文另称总尝试三次；不因该歧义追加扣分。"
+  ],
+  "adjudications": [
+    {
+      "id": "C01",
+      "before": [
+        2,
+        1,
+        2,
+        1
+      ],
+      "after": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "reason": "ViT被绝对化为不引入图像归纳偏置；原文物理第4页明确是much less，并保留patch和位置嵌入调整中的二维先验。按完整实际回答计入这一技术性错误。"
+    },
+    {
+      "id": "C14",
+      "before": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "after": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "reason": "ResNet训练退化及残差学习是题目一侧核心，且有实际返回的第1–2页支持，不能因另一侧Vim错文档将全题正确性和引用均记0。"
+    }
+  ],
+  "scores": [
+    {
+      "id": "F01",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "none",
+      "note": "AI辅助评分：实际回答给出patch切分、线性嵌入序列输入Transformer及监督图像分类，覆盖全部必答点。ViT物理第1页逐项明确说明，且该页确在输出sources内。列表混有其他论文及页码，但关键结论均有正确来源支持；检索工具及原题传参适合此事实查询。",
+      "evidence_checked": [
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 1,
+          "reason": "明确给出split image into patches、sequence of linear embeddings及supervised image classification。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F02",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 0,
+      "bad_case": "generation;citation;agent",
+      "note": "AI辅助评分：152层和3.57%数字正确，但回答把“网络集成在测试集”的3.57%改成单个最深模型的验证集结果。ResNet第2及7页明确区分：单模型验证集4.49%，六模型集成测试集3.57%。上述页已列入sources。工具选择可用，但action_input把原题test ensemble改成validation，属于传参意图偏移。",
+      "evidence_checked": [
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 1,
+          "reason": "摘要：152层，集成在ImageNet test set上3.57%。"
+        },
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 2,
+          "reason": "明确写Our ensemble has 3.57% top-5 error on the ImageNet test set。"
+        },
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 7,
+          "reason": "单模型152层验证top-5 error为4.49%；六模型集成测试top-5 error为3.57%。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F03",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 0,
+      "bad_case": "agent;citation",
+      "note": "AI辅助评分：问题询问两项BLEU、训练天数和GPU数量，实际仅输出作者等元数据及截断摘要，没有任何必答数值。原论文第1页明确为28.4、41.8 BLEU、3.5天、8块GPU，sources虽包含该页也未形成相应答案。paper_metadata只满足元信息查询，替代数值事实问答的路由不合适。",
+      "evidence_checked": [
+        {
+          "source": "attention_is_all_you_need.pdf",
+          "page": 1,
+          "reason": "摘要完整列出28.4 BLEU、41.8 BLEU、3.5 days和eight GPUs；实际元数据回答在这些句子之前截断。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F04",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 0,
+      "bad_case": "agent;citation",
+      "note": "AI辅助评分：实际输出题名、作者和“Abstract未检索到”，未列四个基准及对应提升。第1页摘要明确给出MSRVTT、MSVD、TGIF、ActivityNet及5.8%、9.9%、18.6%、10.1%，且输出sources多次列出第1页。题目要性能对比事实，路由paper_metadata没有完成该任务，引用列表不能替代缺失答案。",
+      "evidence_checked": [
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 1,
+          "reason": "摘要直接连续列出四个基准及相对Video-ChatGPT的四个提升百分比。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F05",
+      "correctness": 1,
+      "completeness": 2,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：开头与最终结论均正确覆盖1248×1248、Vim速度2.8倍和节省86.8%显存，完整性给2分；但中间证据解释却说“DeiT…节省了86.8%”，把节省显存的主体反转，与同页原文和自身结论冲突，正确性及引用只能部分给分。sources第1、2页确支持正确结论，检索传参适合问题。",
+      "evidence_checked": [
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 1,
+          "reason": "摘要及图注：Vim is 2.8倍 faster than DeiT，saves 86.8% GPU memory，场景为1248×1248。"
+        },
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 2,
+          "reason": "正文贡献段明确节省显存主体是Vim，不是DeiT。"
+        }
+      ],
+      "uncertainties": [
+        "本题按整段实际回答评分；若只评分最后一句，会忽略中段的主体反转错误。"
+      ]
+    },
+    {
+      "id": "F06",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "none",
+      "note": "AI辅助评分：实际回答逐项列出DenseNet201、EfficientNetB7、InceptionResNetV2、InceptionV3、ResNet152V2、VGG16，六个版本与正文完全一致。输出sources包含本论文第1页，能够支持全部网络名称。后续重复答案及提到Draft Answer虽属冗余，没有增加事实错误；知识库检索及参数匹配题意。",
+      "evidence_checked": [
+        {
+          "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+          "page": 1,
+          "reason": "引言末段specifically six methods including后逐项给出六个精确版本。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F07",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 0,
+      "bad_case": "agent;citation",
+      "note": "AI辅助评分：实际只有paper_metadata执行TypeError报错，未给任何可用答案，sources为空，失败题保留并计零分。论文第1页摘要明确推荐ViT-B、16×16 patch、linear decoder，并写训练时间减少超过13倍。题目是基准设置及效率事实查询，误选元数据工具，且执行异常直接终止，属于Agent失败。",
+      "evidence_checked": [
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 1,
+          "reason": "摘要推荐微调ViT-B、16×16 patch及线性解码器，训练时间减少超过13倍。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F08",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 0,
+      "bad_case": "agent;citation",
+      "note": "AI辅助评分：实际回答只有题名、作者、期刊、DOI及开头两句摘要，没有参数27.24M到2.61M、GFLOPs 52.37到5.47和4.56ms三个必答内容。所有数值原文位于第1页且该页被sources列出。paper_metadata路由不能代替此项实验数值查询；正确文件出现也不能为尚未输出的结论计引用分。",
+      "evidence_checked": [
+        {
+          "source": "applsci-16-10003.pdf",
+          "page": 1,
+          "reason": "摘要给出参数27.24M→2.61M、GFLOPs 52.37→5.47、4.56ms inference。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F09",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：实际答对12,688张影像、9类及2,688张留出集，但把保留标注数量写成“10,000张影像”，混淆标注实例和开发队列。第7页同页明确84,099 retained annotations与10,000-image development cohort，且第6、7页都在sources。检索及后续搜索意图合理，错误主要在生成时数值与单位绑定。",
+      "evidence_checked": [
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 6,
+          "reason": "正文给12,688张影像和九类，并明确为框级多类目标检测。"
+        },
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 7,
+          "reason": "正文明确84,099 retained annotations；10,000是development cohort影像数，2688是hold-out影像数。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F10",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "none",
+      "note": "AI辅助评分：实际回答依次给出precision 0.936、recall 0.921、IoU=0.5 mAP 0.943，三项对应关系正确且无遗漏。虽然sources没有金标第1页，但列入的物理第48页正文直接逐字列出三项数值与指标，第45页亦有相同实验结果；因此引用给2分，不能因未命中金标页机械扣分。",
+      "evidence_checked": [
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 1,
+          "reason": "摘要给出precision、recall、IoU=0.5 mAP依次0.936、0.921、0.943。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 48,
+          "reason": "正文明确写proposed fused representation achieves precision, recall, and mAP at IoU=0.5 values of 0.936,0.921,0.943；该页在输出sources。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F11",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：回答有“三次”尝试结果，却声称论文未提重量验证，遗漏且否定核心机制。第1页和第6页均明确利用内置力/负载测量，比较抓取前后重量；第6页还给至少0.5kg增量判据，且已在sources。检索输入合理。次数表述摘要与正文有歧义，实际“总共三次”可获正文支持，不据此追加扣分。",
+      "evidence_checked": [
+        {
+          "source": "engproc-157-00021.pdf",
+          "page": 1,
+          "reason": "摘要写weight-based validation、内置force sensing、比较抓取前后load，以及up to three retry attempts。"
+        },
+        {
+          "source": "engproc-157-00021.pdf",
+          "page": 6,
+          "reason": "3.3节明确测初始及放置前负载，增加不足0.5kg则失败；正文写system only tries three times。"
+        }
+      ],
+      "uncertainties": [
+        "参考答案按摘要写最多三次重试；正文第6页写总尝试三次、第三次失败后放弃，两者对初次是否计数存在歧义。未修改基准；本题扣分依据是漏掉并否定重量验证。"
+      ]
+    },
+    {
+      "id": "F12",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 0,
+      "bad_case": "agent;citation",
+      "note": "AI辅助评分：实际返回paper_metadata执行TypeError，三个指标均未回答，sources为空，故三个答案维度均为0分。西瓜论文第1页明确IoU=0.846、Dice=0.915、boundary F1=0.959。题目虽包含“摘要”，意图仍是具体实验指标查询；元数据误路由和执行异常造成整题失败，不能以报错信息充当结果。",
+      "evidence_checked": [
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 1,
+          "reason": "摘要连续列出IoU 0.846、dice 0.915与boundary F1-score 0.959。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F13",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 0,
+      "bad_case": "agent;citation",
+      "note": "AI辅助评分：实际只输出Core/Method/Task/Dataset Keywords，完全没有图像数和牙齿类别数。论文第1页明确为598 images与32 tooth classes，且sources包含第1页。keyword_extract的输入虽正确识别论文标题，但工具用途与数据集规模问答不符，造成无有效回答；关键词相关性不计作必答事实正确。",
+      "evidence_checked": [
+        {
+          "source": "oral-06-00131.pdf",
+          "page": 1,
+          "reason": "摘要Results明确benchmark dental X-ray image dataset containing 598 images and 32 tooth classes。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F14",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "none",
+      "note": "AI辅助评分：实际答出3651帧、25台固定摄像机及SAM 3提示词water，三个必答项均与原文一致。sensors论文物理第1页同时包含这些数字及提示词，也出现在输出sources。未写地点不影响题目要求。先retrieve再search的选择和参数都围绕同一事实问题，工具路由合理。",
+      "evidence_checked": [
+        {
+          "source": "sensors-26-06403.pdf",
+          "page": 1,
+          "reason": "摘要写3651 frames from25 fixed cameras，以及Using SAM3 with text prompt water。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F15",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：回答总数1831及测试100正确，但训练1531和验证187均错误，且相加为1818也不等于1831。论文第1页与第5页一致给1400训练、331验证、100测试，两页都列入sources。属于有正确来源仍生成错误拆分数值，正确性、完整性及引用只能部分给分；知识库查询工具和原题输入合理。",
+      "evidence_checked": [
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 1,
+          "reason": "摘要明确1831张，1400 training、331 validation、100 held-out test。"
+        },
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 5,
+          "reason": "正文数据集协议再次逐项给出1400/331/100，未支持1531或187。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "F16",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 1,
+      "bad_case": "retrieval;citation",
+      "note": "AI辅助评分：实际拒答，未给三个数据集的任一完整类别数/图像数配对；原论文第4页明确1k/1.3M、21k/14M、18k/303M。可见sources中没有ViT第4页，反而以其他论文参考文献页开头，不能为拒答提供有效事实证据。retrieve和search输入均保留目标论文与4.1节，故工具路由仍给1分。",
+      "evidence_checked": [
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 4,
+          "reason": "4.1 Datasets明确ILSVRC-2012 1k类1.3M；ImageNet21k 21k类14M；JFT18k类303M。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 1,
+          "reason": "输出正文显式引用第1页，但其未提供题目要求的三组完整规模，不能替代第4页。"
+        }
+      ],
+      "uncertainties": [
+        "检索问题仅依据可见sources及已记录retrieve observation判断，不推断未记录的内部Top-K或其他隐藏证据。"
+      ]
+    },
+    {
+      "id": "F17",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 0,
+      "routing": 1,
+      "bad_case": "retrieval;generation;citation",
+      "note": "AI辅助评分：实际仅weight decay=0.0001和momentum=0.9正确；Adam、batch128、学习率不明和密集层dropout均不符合ResNet ImageNet第4页的SGD、256、0.1及no dropout。sources遗漏第4页；第7页batch128属于CIFAR-10，不能证明ImageNet配置，其他论文也不可替代。查询工具和英文传参保留原问题，路由给1。",
+      "evidence_checked": [
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 4,
+          "reason": "ImageNet实现：SGD、batch256、初始LR0.1平台期除10、decay0.0001、momentum0.9、no dropout。"
+        },
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 7,
+          "reason": "已引用第7页的batch128属于4.2 CIFAR-10实验；同页虽有相同衰减/动量，也不能把CIFAR设置转作ImageNet配置。"
+        }
+      ],
+      "uncertainties": [
+        "两项数值正确故给部分正确/完整；引用0分依据来源配置场景错误，不能用相同数值掩盖任务语境不匹配。"
+      ]
+    },
+    {
+      "id": "F18",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 0,
+      "bad_case": "retrieval;generation;citation;agent",
+      "note": "AI辅助评分：回答未给任何6层或512维，且说论文未明确描述，直接与第3页3.1节冲突；第三子层还被误称自注意力。最终sources为空。前三次retrieve中可见第3页片段只覆盖解码器后半段，未含所需数字；第三次action_input混入整段Observation和Source记录，污染查询。故既有可见证据覆盖不足，也有生成、引用及Agent传参问题。",
+      "evidence_checked": [
+        {
+          "source": "attention_is_all_you_need.pdf",
+          "page": 3,
+          "reason": "3.1节明确Encoder N=6、Decoder N=6以及各子层/embedding输出dmodel=512；解码器新增子层是attention over encoder output。"
+        }
+      ],
+      "uncertainties": [
+        "只依据保存的三个retrieve observation认定其中未显示所需层数/维度；未把命中第3页等同于检到了该页全部文本。"
+      ]
+    },
+    {
+      "id": "F19",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：实际对语言模型、视觉编码器来源/初始化及采样数全部声称未明确给出，遗漏全部必答项。原论文第5页明确Vicuna-7B v1.5、LanguageBind、OpenCLIP-L/14和均匀8帧，第9页也再次提8帧；两页均在sources。列出原页却不能支持“原论文没有”的结论，属于不受来源支持的否定；检索工具输入合理。",
+      "evidence_checked": [
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 5,
+          "reason": "4.1.2明确语言模型与视觉编码器初始化；4.1.3明确uniformly sample8 frames。"
+        },
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 9,
+          "reason": "限制部分再次明确only utilizes uniformly sampled8 frames。"
+        }
+      ],
+      "uncertainties": [
+        "sources只记录页级来源，无法确认search内部提供给模型的第5页chunk是否包含全部设置段；不声称已看到未保存的内部上下文。"
+      ]
+    },
+    {
+      "id": "F20",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 1,
+      "bad_case": "retrieval;citation",
+      "note": "AI辅助评分：回答完全拒绝给训练步数、有效batch和种子次数，没有任何必答数字。原论文第5页明确ADE20K40000步，其他三个数据集20000步，有效batch16及不同种子重复3次。可见sources没有该第5页，记录的retrieve片段也未显示这些配置；其余页不能支持具体答案。两次查询意图和参数正确，routing给1分。",
+      "evidence_checked": [
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 5,
+          "reason": "实现协议明确实际batch1、梯度累计有效batch16，40000/20000训练步、thrice不同seed、均值标准差。"
+        }
+      ],
+      "uncertainties": [
+        "仅评价可见sources与retrieve observation的证据不足，不推断未记录的内部Top-K。"
+      ]
+    },
+    {
+      "id": "C01",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：正确区分翻译与图像分类并说明patch线性嵌入，但把ViT概括为不引入图像归纳偏置；原文第4页是较少先验，仍使用patch等二维结构。还遗漏语言token序列、编码器—解码器、位置嵌入及分类token。已列来源能支持部分结论，但不支持绝对化说法，故正确性和引用均为部分得分；比较工具及两篇标题传参有效。",
+      "evidence_checked": [
+        {
+          "source": "attention_is_all_you_need.pdf",
+          "page": 1,
+          "reason": "摘要支持纯注意力Transformer及机器翻译任务。"
+        },
+        {
+          "source": "attention_is_all_you_need.pdf",
+          "page": 3,
+          "reason": "返回sources含该页，原文详细说明编码器和解码器，实际答案未展开。"
+        },
+        {
+          "source": "attention_is_all_you_need.pdf",
+          "page": 10,
+          "reason": "WSJ 40K和Berkeley Parser比较在此；回答的相关补充有依据。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 2,
+          "reason": "该返回页直接列出88.55%、90.72%、94.55%、77.63%，并非凭外部记忆判定。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 3,
+          "reason": "核实固定图像块、位置嵌入、分类token；该页用于检查漏答，不在本题返回sources中。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 4,
+          "reason": "Inductive bias段保留二维结构先验，不能解释为完全没有。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C02",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：残差学习缓解深层退化、ViT分块及大数据预训练基本正确，但把4.49%称为CIFAR-10测试集top-5验证错误率；原文是ImageNet验证集的ResNet-152结果。遗漏恒等shortcut相加和CNN局部性/平移等变性，也未明确预训练后迁移小数据任务。该错误在已返回的ResNet第7页即可纠正，不能归因于未检到论文。",
+      "evidence_checked": [
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 2,
+          "reason": "残差F(x)=H(x)-x及恒等shortcut相加支持方法要点。"
+        },
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 7,
+          "reason": "本题sources含此页；4.49%在ImageNet段落，后文另起CIFAR-10实验，不支持答案的数据集归属。"
+        },
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 6,
+          "reason": "表4进一步确认4.49%是ImageNet验证集top-5错误率。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 4,
+          "reason": "核实CNN归纳偏置及大规模预训练/下游微调；该页用于补全性核查，未在本题sources列出。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C03",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 1,
+      "bad_case": "retrieval;generation;citation",
+      "note": "AI辅助评分：核心Vim方法与效率比较没有作答，反而断言第二篇无方法、无结果，仅做语义分割。实际source_b和返回页为Kerssies基准论文，并非2401.09417v3；真实Vim明确给出双向SSM及相对序列长度的线性复杂度。paper_compare及两篇题名传参符合比较意图，routing记1；错误发生在内部论文解析/证据取用，不能用工具名匹配代替质量判断。",
+      "evidence_checked": [
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 1,
+          "reason": "实际返回source_b的首页题名是How to Benchmark，确认错PDF。"
+        },
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 1,
+          "reason": "真实目标论文摘要有双向Mamba、位置嵌入及分类/检测/分割结果，反驳方法和结果缺失。"
+        },
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 5,
+          "reason": "真实目标原文明确self-attention对M二次、SSM对M线性；该PDF未出现在本题sources。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 1,
+          "reason": "只有ViT图像块表示这一侧得到正确来源，不能支持关键Vim比较。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C04",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：图像/视频先对齐文本空间以及红外/可见光双流方向正确，但把热融合相关工作Yang等的coordinate attention归成本方法，并多次声称该文无数据和无实验。其已返回第1页和第55页明确给出对齐数据与YOLO结果。还漏共享投影、语言回答输出、热感知门控及融合图像到YOLO的完整链条；正确两篇已召回，主要为生成和归属错误。",
+      "evidence_checked": [
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 4,
+          "reason": "返回页说明LanguageBind、共享投影和tokenized查询到LLM输出。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 2,
+          "reason": "coordinate attention属于Yang等[10]的Faster R-CNN相关工作，不是本文新模块。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 1,
+          "reason": "已返回摘要含空间对齐数据、热感知门控及precision/recall/mAP结果，反驳无数据无实验。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 55,
+          "reason": "已返回结论页含YOLOv8s统一评价及0.936/0.921/0.943等实际结果。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C05",
+      "correctness": 1,
+      "completeness": 0,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "retrieval;generation;citation",
+      "note": "AI辅助评分：正确提到Top-K和端到端微调优于线性探测，但把前文相关工作误作实际实验方法，并称两篇未给数据集。未解释Top-K类别准确率与像素mIoU为何不可互换，也未给ViT-B/16×16/线性解码器建议。返回sources缺A的实验第3页，可确认该证据未返回；B首页及返回第8页已有建议却仍漏答，不能把全部问题归因于检索。",
+      "evidence_checked": [
+        {
+          "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+          "page": 1,
+          "reason": "摘要明确实际比较六类CNN，未支持答案声称的传统/深度方法广泛实验。"
+        },
+        {
+          "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+          "page": 3,
+          "reason": "实际实验明确ILSVRC2012、Top-K、六方法各5次；该页未在本题sources中。"
+        },
+        {
+          "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+          "page": 4,
+          "reason": "已返回页含Top-K结果与结论，只能支持部分回答。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 1,
+          "reason": "已返回首页含ViT-B、16×16、线性解码器和端到端微调建议。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 4,
+          "reason": "原文列ADE20K/PASCAL VOC/Cityscapes及像素mIoU定义，用于核对指标差异。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 8,
+          "reason": "已返回结论重述设置及多数据集建议，未被答案充分利用。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C06",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：water提示、面积/水线及四项评价目标基本正确，也写出端到端微调相对线性探测的建议。仍声称基准论文缺数据细节，且没有明确水面方案无需任务特定训练、专家掩膜只用于评价，也未解释两种适配结论不矛盾。相关事实在已返回的水面第1页及基准第1/5/8页，属于有证据仍未完成具体比较。",
+      "evidence_checked": [
+        {
+          "source": "sensors-26-06403.pdf",
+          "page": 1,
+          "reason": "已返回页明确without any task-specific training or labeling，及water、3651帧/25相机与96.9%等结果。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 1,
+          "reason": "已返回首页含监督微调、端到端与线性探测区别，以及图示中的数据集。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 5,
+          "reason": "已返回页说明0.38为冻结编码器改变排名的Kendall相关，不是分割精度。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 4,
+          "reason": "原文明确列出ADE20K、PASCAL VOC、Cityscapes，反驳论文缺少数据集信息。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C07",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：正确区分多发现检测与32类牙实例分割/分类，SBRF指标也与摘要一致。但把牙齿文相关工作的multi-scale supervision当成本文框架，遗漏YOLO11s到三骨干特征融合、BCO-KELM分类链。结论声称B有更高accuracy/F1，将不同任务指标作强弱暗示，原文不足以支持。实际两篇及关键首页均已返回，routing正确。",
+      "evidence_checked": [
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 1,
+          "reason": "九类多发现检测、SBRF方法及0.8777/0.8979/0.9152/0.7029均有依据。"
+        },
+        {
+          "source": "oral-06-00131.pdf",
+          "page": 1,
+          "reason": "已返回摘要给YOLO11s、DenseNet201/MobileNet/ShuffleNetV2、BCO-KELM及32类，不是多模态分类。"
+        },
+        {
+          "source": "oral-06-00131.pdf",
+          "page": 4,
+          "reason": "multi-scale supervision出现在Ghafoor等[16]的相关工作段；本文Materials and Methods在该页另起。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C08",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：西瓜定位/椭圆/AISGAN与抽吸多视角米制3D的应用区别基本正确，但将YOLO-LiteSeg的99.02% mAP@0.50写成accuracy，指标归属错误。漏完整形状训练与合成叶片遮挡，以及VGGT深度/相机、棋盘格尺度、2D到3D标签传递，未充分解释超出可见掩膜的信息来源。关键第1页已在sources内，属于生成时漏用/误读证据。",
+      "evidence_checked": [
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 1,
+          "reason": "已返回摘要支持完整果形、合成叶片遮挡及边界F1=0.959。"
+        },
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 2,
+          "reason": "核查YOLO11-OBB与椭圆建模的框架描述。"
+        },
+        {
+          "source": "applsci-16-10003.pdf",
+          "page": 1,
+          "reason": "已返回摘要明确VGGT、棋盘格、语义投射；99.02%明示为mean average precision at IoU0.50。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C09",
+      "correctness": 1,
+      "completeness": 0,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：答对路锥ROS2硬件和抽吸米制3D用途，却主要重复通用方法/数据段，未答测量均值、观察位姿、负载验证、失败重试及抽吸深度/净空约束等核心机制。还称路锥文无实验，并把抽吸99.02% mAP称accuracy。两篇返回第1页已经包含这些机制和结果，引用文件正确但不能支持上述否定及指标表述。",
+      "evidence_checked": [
+        {
+          "source": "engproc-157-00021.pdf",
+          "page": 1,
+          "reason": "已返回摘要明确多测量取均值、分阶段观察、重量验证、三次重试及实验效果。"
+        },
+        {
+          "source": "engproc-157-00021.pdf",
+          "page": 2,
+          "reason": "支持Doosan M1013、ZED 2i和ROS2架构；实际回答摄像头略写ZED2。"
+        },
+        {
+          "source": "engproc-157-00021.pdf",
+          "page": 5,
+          "reason": "已返回页具体说明50次测量取均值，并写实验测量结果，反驳无实验。"
+        },
+        {
+          "source": "applsci-16-10003.pdf",
+          "page": 1,
+          "reason": "已返回页给深度/净空选点和99.02% mAP@0.50，非accuracy。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C10",
+      "correctness": 2,
+      "completeness": 0,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "generation",
+      "note": "AI辅助评分：已表达的两项检测任务、香云纱三个种子和SBRF数值基本准确，未把跨数据集mAP直接判优。但没有回答开发/最终评价分离：训练验证测试划分、仅按验证选型、留出测试均值标准差、SBRF独立种子及成对bootstrap几乎全缺。仅列种子和通用方法，主要验收点缺失；这些信息均在已返回的两篇首页，引用本身可支持已写内容。",
+      "evidence_checked": [
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 1,
+          "reason": "已返回摘要含1400/331/100划分、仅验证选型、三种子和留出测试统计，答案大多遗漏。"
+        },
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 21,
+          "reason": "已返回页确实说明0/42/123结果见S1–S4，支持答案此项。"
+        },
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 25,
+          "reason": "已返回结论及补充材料清单支持种子文件表述。"
+        },
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 1,
+          "reason": "已返回摘要支持指标及固定2688留出、三种子、配对bootstrap，后几项未被作答。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C11",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：识别了工业热/可见融合与香云纱人主导材料决策的场景差异，但重复把coordinate attention相关工作归本方法，并否认热融合文有实验。未给定向印染/局部裁切、统一YOLO链和定量减废/泛化/生命周期尚待验证的边界。两篇第1页及热融合第55页均已返回且足够纠正，缺陷是生成归属错误和针对性不足。",
+      "evidence_checked": [
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 2,
+          "reason": "coordinate attention是Yang等[10]相关工作。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 1,
+          "reason": "已返回页含双模态互补、统一YOLO数据和实验指标。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 55,
+          "reason": "已返回结论列具体评价结果，反驳无实验。"
+        },
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 1,
+          "reason": "已返回摘要说明人主导定向印染/裁切，及量化减废等仍待验证。"
+        },
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 23,
+          "reason": "已返回页明确设计案例不是定量减废证据，正是题目要求的表述边界。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C12",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "generation",
+      "note": "AI辅助评分：西瓜YOLO/椭圆/amodal GAN、SBRF代表分配/边界条件融合及两类任务和数值均基本正确，双方返回首页可支持。仍未清楚解释可见轮廓导致尺寸低估与弱边界导致严格定位困难的不同原因，也漏完整果形恢复、运行时权衡和部署前验证边界。是有相关事实但不完整的通用比较，不应因漏答把正确性直接记零。",
+      "evidence_checked": [
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 1,
+          "reason": "支持遮挡下大小低估、完整形状估计框架与0.959边界F1；回答没有讲清因果。"
+        },
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 2,
+          "reason": "支持YOLO11-OBB、椭圆建模及AISGAN方法描述。"
+        },
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 1,
+          "reason": "支持尺度/弱边界检测及四项指标，并说明收益有限、延迟权衡及部署验证，后者被遗漏。"
+        },
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 6,
+          "reason": "核对SBRF代表交互与边界条件融合方法，支持已表达的方法对比。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C13",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "generation",
+      "note": "AI辅助评分：图像/视频对齐文本空间、视觉问答与water提示后的水面指标等已表达事实基本有据，数值也可从返回首页核对。然而几乎没有比较训练方式：混合图像视频、理解预训练、指令多轮调优及LLM参与训练，与SAM任务特定免训练的区别均未解释。实际sources含Video第4/5页和水面第1页，主要是生成漏用已召回证据。",
+      "evidence_checked": [
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 4,
+          "reason": "已返回页完整说明混合训练、理解训练、指令调优及LLM参与，答案未分析。"
+        },
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 5,
+          "reason": "已返回图3及数据说明区分两阶段单轮/多轮训练。"
+        },
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 7,
+          "reason": "支持MM-GPT三个POPE子集比较。"
+        },
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 9,
+          "reason": "8/9基准改善实际针对同图像编码器的LLaVA-1.5†，答案省略该比较限定，需审阅时保留此条件。"
+        },
+        {
+          "source": "sensors-26-06403.pdf",
+          "page": 1,
+          "reason": "已返回页给water提示、免任务特定训练与96.9%等；答案仅列结果，未说明训练含义。"
+        }
+      ],
+      "uncertainties": [
+        "答案把8/9比较简写为LLaVA-1.5；原文是同编码器配置的LLaVA-1.5†。此处按模型名简写处理，建议最终人工复核该限定。"
+      ]
+    },
+    {
+      "id": "C14",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "retrieval;generation;citation",
+      "note": "AI辅助评分：已正确回答ResNet以残差学习缓解深层训练退化，且其第1–2页在sources中，故保留部分正确和引用得分。但Vim被解析为Kerssies错论文，长序列效率、双向SSM及迁移任务均未说明；又把ResNet的ImageNet验证集4.49%误归CIFAR-10。比较工具与原题两标题传参有效，routing为1，不能与内部错文档问题混为一谈。",
+      "evidence_checked": [
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 2,
+          "reason": "已返回页支持残差学习解决退化与深层训练。"
+        },
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 7,
+          "reason": "已返回页将4.49%定位为ImageNet验证top-5，否定CIFAR-10说法。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 1,
+          "reason": "本题实际source_b为基准论文首页，确认目标Vim匹配错PDF。"
+        },
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 2,
+          "reason": "真实目标页有双向SSM、ImageNet训练到检测/分割迁移和效率，未在本题sources出现。"
+        },
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 5,
+          "reason": "真实目标复杂度分析支持长序列效率，而非无方法无结果。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "C15",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：正确区分牙齿分类与设备缺陷检测的大方向，但未说明三骨干特征融合到BCO-KELM，以及双模态融合图像到YOLO的不同链条；泛称两者融合不同模态易误导牙齿框架来源。还把牙齿相关工作的multi-scale supervision及热文相关工作的coordinate attention归本方法，并声称热文无数据/实验。双方关键首页已返回，问题主要在生成归属及引用支持不足。",
+      "evidence_checked": [
+        {
+          "source": "oral-06-00131.pdf",
+          "page": 1,
+          "reason": "已返回摘要明确同一牙区多骨干特征融合、BCO-KELM及598图/32类。"
+        },
+        {
+          "source": "oral-06-00131.pdf",
+          "page": 4,
+          "reason": "multi-scale supervision位于Ghafoor相关工作，不是本文顺序框架的模块。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 2,
+          "reason": "coordinate attention属于Yang等相关工作。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 1,
+          "reason": "已返回摘要含双模态来源、数据、统一YOLO和结果，反驳无数据无实验。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 55,
+          "reason": "已返回结论有实际YOLOv8s指标，应与融合后检测链一起表述。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "S01",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：抓住深层网络训练困难与残差学习的大意，但将COCO实验错误写成110层；原文COCO比较为ResNet-101，110层属于CIFAR-10。还把作者对非视觉应用的期待写成已适用。缺少F(x)=H(x)-x、恒等捷径、152层复杂度和3.57%结果；现有来源仅能支持部分结论。",
+      "evidence_checked": [
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 1,
+          "reason": "摘要报告残差学习、152层及COCO相对提升28%。"
+        },
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 2,
+          "reason": "原文给出残差映射和恒等捷径，并将非视觉应用表述为期待。"
+        },
+        {
+          "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+          "page": 8,
+          "reason": "COCO表8和正文使用ResNet-101；图6的110层属于CIFAR-10。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "S02",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "generation",
+      "note": "AI辅助评分：已说明图像patch序列、标准Transformer和大规模预训练有较好效果，且所提ImageNet-21k与TPUv3资源信息可由来源第6页支持。主要不足是未讲线性嵌入、位置嵌入、分类token和以其输出分类，也未解释小数据表现与局部性、平移等变性等归纳偏置的关系。已表达部分没有影响核心结论的实质错误。",
+      "evidence_checked": [
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 1,
+          "reason": "图像patch线性嵌入与监督分类的基本方案。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 3,
+          "reason": "完整输入表示、位置嵌入和分类token，实际答案遗漏这些细节。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 6,
+          "reason": "ImageNet-21k预训练ViT-L/16与8核TPUv3约30天、规模对比均有原文。"
+        }
+      ],
+      "uncertainties": [
+        "背景中“传统归纳偏置限制灵活性和可扩展性”是宽泛概括，非论文独立验证结论；本次未将此宽泛措辞作为核心事实错误。"
+      ]
+    },
+    {
+      "id": "S03",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 1,
+      "bad_case": "retrieval;generation;citation",
+      "note": "AI辅助评分：整篇回答讨论VFM语义分割的标准化评测，而题目要求Vim双向状态空间架构、位置感知和分类/检测/分割任务。最终sources全部来自另一篇How to Benchmark论文，没有目标Vim文献，因而主要内容与题意错位、引用无法支持目标论文结论。paper_summary作为单篇总结工具本身选择合理，未因内部取错文献扣routing。",
+      "evidence_checked": [
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 2,
+          "reason": "目标论文明确双向SSM、位置嵌入及ImageNet预训练和下游密集预测。"
+        },
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 5,
+          "reason": "目标论文讨论SSM线性与自注意力二次序列复杂度。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 1,
+          "reason": "回答实际对应这篇评测论文的研究主题，而非Vim。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "S04",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：正确说出投影前对齐图像与视频，但把对齐语言空间和共享投影的先后关系写得含混，遗漏LanguageBind、同batch混合样本、理解预训练/指令微调及参数训练安排。还将MSVD/MSRVTT/TGIF/ActivityNet视频问答数据误归入图像理解实验，三项数据名称配四个提升数字；来源第6页可直接核查任务混淆。",
+      "evidence_checked": [
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 4,
+          "reason": "统一表示在LanguageBind语言空间预对齐，后共享投影；训练分两阶段。"
+        },
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 5,
+          "reason": "训练数据构成、联合batch、理解预训练与指令调优设置。"
+        },
+        {
+          "source": "2311.10122v3.pdf",
+          "page": 6,
+          "reason": "表2为四个视频问答数据集；表3图像基准是VQAv2/GQA等。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "S05",
+      "correctness": 1,
+      "completeness": 0,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：多数文字只复述“研究推荐评测设置”，未给出题目要求的ViT-B、16×16 patch、线性解码器、多个数据集及不推荐线性探测，主要必答点缺失。“通过线性微调”措辞未区分端到端微调与线性解码器，无法准确表达原推荐。来源第1、8页已有完整建议，因此不能归因为可见来源缺少信息。",
+      "evidence_checked": [
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 1,
+          "reason": "摘要明确ViT-B/16×16/线性解码器、跨数据集和反对linear probing。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 8,
+          "reason": "结论再次要求端到端微调，并说明线性探测不具代表性。"
+        }
+      ],
+      "uncertainties": [
+        "“线性微调”含义不清：可能想指线性解码器，也可能误指线性探测；没有据此推定明确冻结编码器，但其方法表述仍不足以正确回答配置。"
+      ]
+    },
+    {
+      "id": "S06",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 0,
+      "bad_case": "retrieval;generation;citation;agent",
+      "note": "AI辅助评分：六种网络名称及Top-K指标部分正确，但将实际ILSVRC2012误写为ADE20K，遗漏EfficientNetB7的Top1优势及ResNet152V2的Top2/3优势。单篇总结被误拆为Paper A与“评价指标、主要结果”Paper B，加入不相关红外融合论文，并把比较方法名称称为数据集；单篇误路由比较故routing=0。",
+      "evidence_checked": [
+        {
+          "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+          "page": 1,
+          "reason": "目标研究列明六种待比较网络。"
+        },
+        {
+          "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+          "page": 3,
+          "reason": "实验明确ILSVRC2012、Top-K和每种方法运行5次取平均。"
+        },
+        {
+          "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+          "page": 4,
+          "reason": "结果明确Top1与Top2/3分别占优的方法。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 1,
+          "reason": "EgeFusion、DANT-GAN、ITFuse为比较方法，非目标实验数据集。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "S07",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：正确提到同步多视角RGB、实例分割、尺度3D重建、语义转移与约束吸取点选择，但没说明YOLO-LiteSeg/VGGT分工、深度和间距准则及输出只是参考点。结尾“实现高效灵活吸取操作”超出原文：第22页明确只在受控模拟中验证，实际吸取和真实灾害现场仍未验证。来源能支持框架，不能支持该操作效果断言。",
+      "evidence_checked": [
+        {
+          "source": "applsci-16-10003.pdf",
+          "page": 4,
+          "reason": "原文列明三模块、YOLO-LiteSeg和VGGT，以及满足准则的参考点输出。"
+        },
+        {
+          "source": "applsci-16-10003.pdf",
+          "page": 22,
+          "reason": "结论明确验证限于受控模拟，实际吸取过程表现仍未验证。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "S08",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "generation",
+      "note": "AI辅助评分：数据集598张、32类和四项指标与原文一致，图像增强及融合特征/优化算法的总体描述也未出现实质事实错误；来源第1、3、17页可支持这些已表达内容。但主要处理链过于空泛，漏掉YOLO11s/Adam、三个特征提取器、KELM和BCO优化C/γ，故完整性只能部分得分；不因遗漏本身降低已有引用的支持度。",
+      "evidence_checked": [
+        {
+          "source": "oral-06-00131.pdf",
+          "page": 1,
+          "reason": "完整预处理—分割—融合特征—KELM/BCO链及598张32类和结果指标。"
+        },
+        {
+          "source": "oral-06-00131.pdf",
+          "page": 3,
+          "reason": "论文明确accuracy、precision、recall、F1和IoU为评价量。"
+        },
+        {
+          "source": "oral-06-00131.pdf",
+          "page": 17,
+          "reason": "结论重述方法与实验结果，说明为牙科专业判断提供支持。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "S09",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：能说明交通锥检测/双目定位与西瓜YOLO-OBB、椭圆、AISGAN，但遗漏A的50次平均、多阶段观测和载荷验证，以及B的双椭圆后处理和共同的任务几何/验证机制。“Paper A没有实验结果”明显错误，原文第7、8页给出性能评估。两篇对象解析正确，paper_compare适合这一跨两篇归纳，不能因未列于accepted集合就判routing错误。",
+      "evidence_checked": [
+        {
+          "source": "engproc-157-00021.pdf",
+          "page": 5,
+          "reason": "50次点平均和多阶段观测用于提高抓取定位精度。"
+        },
+        {
+          "source": "engproc-157-00021.pdf",
+          "page": 7,
+          "reason": "原文有Performance Evaluation及附件改进的实验结果。"
+        },
+        {
+          "source": "engproc-157-00021.pdf",
+          "page": 8,
+          "reason": "原文有重试成功率和观测策略实验，否定“没有结果”。"
+        },
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 3,
+          "reason": "OBB转椭圆先验指导AISGAN重建。"
+        },
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 5,
+          "reason": "双椭圆并集后处理减少不对称遮挡下的尺寸低估。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "S10",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 0,
+      "routing": 0,
+      "bad_case": "agent;retrieval;citation",
+      "note": "AI辅助评分：最终只有“两篇解析同一PDF”的诊断信息，没有三篇论文的输入、方法或输出，sources为空。trace显示把Paper A/B/C占位符及三篇说明传入两篇比较工具，工具实际只解析Paper A和Paper B并报告失败，却被上层success=True终止。此处按实际答案和错误参数评分，不能把流程成功字段当作答对。",
+      "evidence_checked": [
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 1,
+          "reason": "第一篇为红外/可见双流融合并用于输电设备检测。"
+        },
+        {
+          "source": "sensors-26-06403.pdf",
+          "page": 1,
+          "reason": "第二篇为固定监控图像经SAM 3生成水面积、水线和报警评估。"
+        },
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 1,
+          "reason": "第三篇为香云纱缺陷检测与人工设计决策支持。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R01",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 0,
+      "routing": 1,
+      "bad_case": "generation;citation;agent",
+      "note": "AI辅助评分：公式及高维点积幅度过大会使softmax极端的方向部分正确，但遗漏原文核心的“极小梯度”以及方差d_k的说明，额外声称降低输入依赖、提高泛化并非正文给出的缩放原因。最终sources为空，无法核验回答所据页码；trace还出现完全相同检索的重复调用。初始检索工具和参数符合题意，routing仍记1。",
+      "evidence_checked": [
+        {
+          "source": "attention_is_all_you_need.pdf",
+          "page": 4,
+          "reason": "正文说明点积变大使softmax进入梯度极小区，脚注给出独立分量下的方差d_k。"
+        }
+      ],
+      "uncertainties": [
+        "trace中检索观察确实包含目标论文第4页公式片段，因此未把最终sources为空直接等同于完全没有检索到该论文。"
+      ]
+    },
+    {
+      "id": "R02",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：正确提及ImageNet-21k预训练后迁移表现较好，TPUv3资源信息也有原文支持；但未解释缺少局部性和平移等变性归纳偏置，更没比较ImageNet、21k、JFT规模下Base/Large关系。把较大预训练后的结果推成“ImageNet从头训练也可能更优”缺乏该证据支持，混淆预训练与从头训练条件；可见来源第2、6页已含正确因果讨论。",
+      "evidence_checked": [
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 2,
+          "reason": "数据不足下归纳偏置缺失影响泛化，更大训练规模可改变表现。"
+        },
+        {
+          "source": "An_Image_is_Worth_16x16_Words.pdf",
+          "page": 6,
+          "reason": "正文同时给出云TPU资源信息和Base/Large随预训练规模变化的实验结论。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R03",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "none",
+      "note": "AI辅助评分：完整回答了双向SSM对应单向建模限制、位置嵌入对应位置感知不足，两种设计的作用区分清楚。所述每块增加反向SSM、同时处理正向和反向序列与第8页的Bidirectional SSM描述一致；第2页也明确两项挑战和对应设计。未把双向性误当成位置信息替代，工具与题意匹配。",
+      "evidence_checked": [
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 2,
+          "reason": "两项挑战及双向全局上下文、位置感知设计均明确。"
+        },
+        {
+          "source": "2401.09417v3.pdf",
+          "page": 8,
+          "reason": "双向SSM为每块增加额外SSM处理反向序列。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R04",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "none",
+      "note": "AI辅助评分：准确说明线性探测虽然省资源，但冻结编码器会明显改变模型排名，0.38的相关系数不足以代表端到端微调，因此推荐端到端基准。因果链、数字和推荐结论均被实际sources中的第5页支持，第1、8页还有对应结论；使用英文回答并不改变其内容准确性，本题无需据语言形式扣分。",
+      "evidence_checked": [
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 5,
+          "reason": "正文以0.38相关性解释冻结编码器改变排名，推荐端到端微调。"
+        },
+        {
+          "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+          "page": 8,
+          "reason": "结论再次不推荐linear probing替代端到端基准。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R05",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：局部/全局融合与0.6934到0.7029数字正确，但没有说明题目核心：mAP50-95要求更严格IoU下的框重叠，分类正确仍不够，也未解释边界门控局部增强与全局适度保留。把代表计数说成已做专门敏感性分析不准确，原文固定M=25，未比较自适应规则与固定预算；现有来源仅支持部分性能事实。",
+      "evidence_checked": [
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 15,
+          "reason": "正文解释边界门控和mAP50-95的严格框重叠要求。"
+        },
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 23,
+          "reason": "A0/A2分数确为0.6934/0.7029，敏感性为固定M=25的布置/融合比较。"
+        },
+        {
+          "source": "diagnostics-16-03259.pdf",
+          "page": 30,
+          "reason": "明确本实验未比较计数规则与固定代表预算。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R06",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：结构细节与局部热响应互补、红外为归一化响应且不能独立确认热故障等事实均有第4、56页支持。但题目所需的模态各自弱点和简单平均对所有模态/位置等权、忽略热响应分布等机制没有讲清；结尾用“红外信号不确定性”证明“简单平均丢失细节”缺少直接因果依据，属于部分正确但论证偏移。",
+      "evidence_checked": [
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 4,
+          "reason": "细小结构与局部热信号需要共同保留，普通聚合不区分共享/专属信息。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 48,
+          "reason": "直接解释简单平均不考虑模态特征、空间重要性及热响应分布。"
+        },
+        {
+          "source": "energies-19-04788.pdf",
+          "page": 56,
+          "reason": "归一化热响应不等同校准绝对温度，强响应不可独立确认热故障。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R07",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "none",
+      "note": "AI辅助评分：准确解释独立测试与模型开发分离以减少评价偏差，也明确修订划分后从零训练且不继承检查点、权重、优化器及其他学习状态。虽未逐项展开验证集的具体用途，但已覆盖题目两项“为什么”的关键因果，且正文显式引用和sources都指向第5页，证据足以支持全部核心结论。",
+      "evidence_checked": [
+        {
+          "source": "sustainability-18-10291.pdf",
+          "page": 5,
+          "reason": "训练/验证/保留测试用途分离；修订后从头训练不继承状态；原文明说降低评价偏差。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R08",
+      "correctness": 0,
+      "completeness": 0,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：把0/102不能称验证误报率的原因归到色彩规则缺少端到端评估，混淆了该基线与SAM复合报警规则。题目核心是规则在同一负例集设计导致样本内偏差，以及冻结后14天1072帧独立验证，回答均未给出。四项泛化评测内容虽可由摘要支持，却不回答该因果；“确保实际操作有效”也超过原文验证边界。",
+      "evidence_checked": [
+        {
+          "source": "sensors-26-06403.pdf",
+          "page": 8,
+          "reason": "两规则/阈值来自同一负例数据，0误报只能作回顾性一致性展示。"
+        },
+        {
+          "source": "sensors-26-06403.pdf",
+          "page": 11,
+          "reason": "独立14天1072帧应用冻结管线及规则，未重调参。"
+        },
+        {
+          "source": "sensors-26-06403.pdf",
+          "page": 19,
+          "reason": "色彩规则68%假阳性的端到端评价讨论确存在，但不构成复合规则0/102的原因。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R09",
+      "correctness": 1,
+      "completeness": 1,
+      "citation_accuracy": 1,
+      "routing": 1,
+      "bad_case": "generation;citation",
+      "note": "AI辅助评分：正确指出2D语义掩码缺少3D几何且需要结合语义/几何，但把尺度未对齐概括为“缺乏精确空间定位”，没有区分尺度歧义与定位精度。遗漏高度、坡度、间距和吸取深度是物理量的关键理由，以及棋盘格对齐和深度/间距约束输出。来源第1、2、4页实际上都已提供相关解释，因此主要是生成不完整和概念表述不准。",
+      "evidence_checked": [
+        {
+          "source": "applsci-16-10003.pdf",
+          "page": 1,
+          "reason": "掩码无法给出物理高度、坡度、净空；纯几何又缺少障碍物语义。"
+        },
+        {
+          "source": "applsci-16-10003.pdf",
+          "page": 2,
+          "reason": "厚度、高度、距离与吸取深度均为metric quantities，须转物理尺度。"
+        },
+        {
+          "source": "applsci-16-10003.pdf",
+          "page": 4,
+          "reason": "语义投影后按吸取深度和maximin间距准则生成参考点。"
+        }
+      ],
+      "uncertainties": []
+    },
+    {
+      "id": "R10",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_accuracy": 2,
+      "routing": 1,
+      "bad_case": "generation",
+      "note": "AI辅助评分：抓住可见区域分割造成遮挡下形状不完整和尺寸低估，非模态补全结合椭圆先验可提高边界与尺寸估计的核心理由，sources第1至3页能够支持已回答内容。仍未具体解释OBB产生旋转感知椭圆几何先验、不同朝向鲁棒性和双椭圆应对不对称遮挡，因此完整性记1；“低估遮挡”按后文尺寸低估理解，未另作实质错误。",
+      "evidence_checked": [
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 2,
+          "reason": "遮挡导致不完整掩码与低估尺寸，AISGAN进行形状重建。"
+        },
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 3,
+          "reason": "OBB转为椭圆先验指导AISGAN、提高不同朝向鲁棒性。"
+        },
+        {
+          "source": "engproc-159-00004.pdf",
+          "page": 5,
+          "reason": "双椭圆组合应对不对称遮挡并减少低估，实际答案未展开。"
+        }
+      ],
+      "uncertainties": []
+    }
+  ]
+}

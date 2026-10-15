@@ -8,6 +8,7 @@ sys.path.insert(0, "/root/autodl-tmp/rag_project")
 import time
 from typing import List, Dict, Any
 import ollama
+from src.config import LLM_KEEP_ALIVE, llm_options
 
 from src.data_loader.pdf_loader import load_pdfs_from_dir
 from src.chunking.chunker import chunk_pages
@@ -133,7 +134,8 @@ class RAGPipeline:
                 {"role": "system", "content": RAG_SYSTEM_PROMPT},
                 {"role": "user", "content": prompt},
             ],
-            options={"temperature": temperature},
+            options=llm_options(temperature),
+            keep_alive=LLM_KEEP_ALIVE,
         )
         answer = response["message"]["content"]
         generate_time = time.time() - t1

@@ -1,0 +1,50 @@
+[
+  {
+    "file": "01_dataset_profile.pdf",
+    "page_count": 1,
+    "raster_images": 0,
+    "width_cm": 16.8
+  },
+  {
+    "file": "02_retrieval_quality.pdf",
+    "page_count": 1,
+    "raster_images": 0,
+    "width_cm": 16.8
+  },
+  {
+    "file": "03_retrieval_tradeoff.pdf",
+    "page_count": 1,
+    "raster_images": 0,
+    "width_cm": 16.8
+  },
+  {
+    "file": "04_paired_hits.pdf",
+    "page_count": 1,
+    "raster_images": 0,
+    "width_cm": 16.8
+  },
+  {
+    "file": "05_agent_performance.pdf",
+    "page_count": 1,
+    "raster_images": 0,
+    "width_cm": 16.8
+  },
+  {
+    "file": "06_ai_quality.pdf",
+    "page_count": 1,
+    "raster_images": 0,
+    "width_cm": 16.8
+  },
+  {
+    "file": "07_bad_cases.pdf",
+    "page_count": 1,
+    "raster_images": 0,
+    "width_cm": 16.8
+  },
+  {
+    "file": "08_architecture.pdf",
+    "page_count": 1,
+    "raster_images": 0,
+    "width_cm": 16.8
+  }
+]

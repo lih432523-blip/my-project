@@ -1,6 +1,7 @@
 import json
 import urllib.request
 import urllib.error
+from src.config import LLM_TIMEOUT, LLM_KEEP_ALIVE, llm_options
 
 
 OLLAMA_URL = "http://127.0.0.1:11434/api/chat"
@@ -11,7 +12,7 @@ def chat(
     system_prompt: str,
     user_prompt: str,
     temperature: float = 0.1,
-    timeout: int = 120,
+    timeout: int = LLM_TIMEOUT,
     json_mode: bool = False,
 ) -> str:
     """
@@ -38,9 +39,8 @@ def chat(
             },
         ],
         "stream": False,
-        "options": {
-            "temperature": temperature,
-        },
+        "options": llm_options(temperature),
+        "keep_alive": LLM_KEEP_ALIVE,
     }
 
     # JSON 结构化输出

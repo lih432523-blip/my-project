@@ -1,0 +1,113 @@
+{
+  "topic": "视觉表征学习与图像感知应用",
+  "papers": [
+    {
+      "source": "2311.10122v3.pdf",
+      "pages": 14,
+      "sha256": "b7914d4dc854e8fe1f5f22c9708b4771dc1e7021180d845aecd5014ef1e9c30d",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\2311.10122v3.pdf"
+    },
+    {
+      "source": "2401.09417v3.pdf",
+      "pages": 14,
+      "sha256": "15c3ccf7340a412e6ce408526c03a67e412d9bb4958e6c0bfe310394b6337444",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\2401.09417v3.pdf"
+    },
+    {
+      "source": "An_Image_is_Worth_16x16_Words.pdf",
+      "pages": 22,
+      "sha256": "8ce7b83971a14508ca711a27c875c9b6914c4f6767cf3150fb1ca6c07aa056d6",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\An_Image_is_Worth_16x16_Words.pdf"
+    },
+    {
+      "source": "applsci-16-10003.pdf",
+      "pages": 26,
+      "sha256": "7fecd86140254891ef10c2e36167383299195f814f8ef9a1b78ea9a5f95e7d7a",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\applsci-16-10003.pdf"
+    },
+    {
+      "source": "attention_is_all_you_need.pdf",
+      "pages": 15,
+      "sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\attention_is_all_you_need.pdf"
+    },
+    {
+      "source": "Deep_Residual_Learning_for_Image_Recognition.pdf",
+      "pages": 9,
+      "sha256": "51b5de45eb0b558b19c3affe49503cff50cb170a32de602983d6e2ec286942a7",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\Deep_Residual_Learning_for_Image_Recognition.pdf"
+    },
+    {
+      "source": "diagnostics-16-03259.pdf",
+      "pages": 35,
+      "sha256": "2f6972b502fc0b3061e8f1900f866fae135cc393b287825546bdbde2d4cccc09",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\diagnostics-16-03259.pdf"
+    },
+    {
+      "source": "energies-19-04788.pdf",
+      "pages": 58,
+      "sha256": "7b4d493148631d2db3090bb9ca984b36bb19d7d5c051ce5ffdfda4ae1285fec1",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\energies-19-04788.pdf"
+    },
+    {
+      "source": "engproc-157-00021.pdf",
+      "pages": 10,
+      "sha256": "fcf3fce16ed243477cdb0b23d2d5f51ba6d020a28a7cac9752ad7b6009fadeae",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\engproc-157-00021.pdf"
+    },
+    {
+      "source": "engproc-159-00004.pdf",
+      "pages": 8,
+      "sha256": "2ba6c5b4db4aea1b488b93b17769386166b8727f136401375b19075e4d40db20",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\engproc-159-00004.pdf"
+    },
+    {
+      "source": "How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf",
+      "pages": 6,
+      "sha256": "27f8bac3ab040df1dfc84b9ae041038c066b1bd29967b98e19ddbb91f069645a",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\How_to_Choose_a_Suitable_Method_in_Image_Semantic_Segmentation-An_Experimental_Study.pdf"
+    },
+    {
+      "source": "Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf",
+      "pages": 10,
+      "sha256": "3d4aa1be75015b10e40a3b1215ddcc2da49a3a8ac651c33781c346b52ecc360d",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\Kerssies_How_to_Benchmark_Vision_Foundation_Models_for_Semantic_Segmentation_CVPRW_2024_paper.pdf"
+    },
+    {
+      "source": "oral-06-00131.pdf",
+      "pages": 19,
+      "sha256": "de060a66ab927ee46fc9c6f5ff7b5a50cfe3adbe84f10a92aecb4de318821ede",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\oral-06-00131.pdf"
+    },
+    {
+      "source": "sensors-26-06403.pdf",
+      "pages": 23,
+      "sha256": "4a4bd630b89e36e19fe691b5c86e1c9a8008144b98d7af257fe481506a825f67",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\sensors-26-06403.pdf"
+    },
+    {
+      "source": "sustainability-18-10291.pdf",
+      "pages": 27,
+      "sha256": "2ed8eef2c3d3cdd22ad9d55d01d7067fdfc6b1af20a68e90097977c13bc43119",
+      "original_path": "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\data\\sustainability-18-10291.pdf"
+    }
+  ],
+  "excluded": [
+    {
+      "source": "1706.03762v7.pdf",
+      "reason": "与attention_is_all_you_need.pdf完全重复"
+    },
+    {
+      "source": "Attention Is All You Need.pdf",
+      "reason": "相同论文与逐页文本，保留canonical文件"
+    },
+    {
+      "source": "engproc-159-00004 (1).pdf",
+      "reason": "与engproc-159-00004.pdf完全重复"
+    },
+    {
+      "source": "Prompt Engineering_v7.pdf",
+      "reason": "提示工程指南，不属于视觉研究论文评测主题"
+    }
+  ]
+}

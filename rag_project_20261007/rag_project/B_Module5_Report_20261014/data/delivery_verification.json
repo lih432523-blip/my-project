@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "report_pages": 28,
+  "figures": 8,
+  "figure_formats": [
+    "vector PDF",
+    "240dpi PNG"
+  ],
+  "table_fragments": 7,
+  "qa": 55,
+  "retrieval_rows": 495,
+  "corpus_papers": 15,
+  "physical_pages": 296,
+  "agent_failures_retained": 2,
+  "unresolved_references": false,
+  "overfull_boxes": 0,
+  "original_source_hashes_unchanged": true,
+  "independent_human_review": false,
+  "compile_engine": "Tectonic 0.17.0 (XeTeX)",
+  "visual_qa": "All 28 final report pages rendered with Poppler and inspected; all 8 vector figure PDFs independently rendered and inspected."
+}

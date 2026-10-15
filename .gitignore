@@ -1,0 +1,9 @@
+.idea/
+.DS_Store
+.env
+.env.local
+__pycache__/
+*.py[cod]
+
+# Local source PDFs are supplied separately; keep the existing tracked examples.
+/rag_project_20261007/rag_project/data/*.pdf

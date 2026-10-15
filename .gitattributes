@@ -1,0 +1,9 @@
+# Preserve exact experiment and report bytes so archived SHA-256 checks remain valid.
+rag_project_20261007/rag_project/evaluation/** -text -whitespace
+rag_project_20261007/rag_project/B_Module5_Report_20261014/** -text whitespace=cr-at-eol
+rag_project_20261007/rag_project/B_Module5_Report_20261014/data/** -whitespace
+
+# These files are fingerprinted by the experiment metadata; retain existing line endings.
+rag_project_20261007/rag_project/src/** -text whitespace=cr-at-eol
+rag_project_20261007/rag_project/scripts/module5_*.py -text whitespace=cr-at-eol
+rag_project_20261007/rag_project/scripts/run55.py -text whitespace=cr-at-eol

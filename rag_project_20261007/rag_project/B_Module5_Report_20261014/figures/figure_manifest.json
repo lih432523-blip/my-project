@@ -1,0 +1,48 @@
+{
+  "data_sha256": "5e20daa5df224e66c499c65934ab56d15b6c08c16282d365399de9c732cdd53a",
+  "png_dpi": 240,
+  "width_cm": 16.8,
+  "figure_count": 8,
+  "figures": [
+    {
+      "basename": "01_dataset_profile",
+      "width_inches": 6.6141732283464565,
+      "height_inches": 4.84251968503937
+    },
+    {
+      "basename": "02_retrieval_quality",
+      "width_inches": 6.6141732283464565,
+      "height_inches": 4.330708661417323
+    },
+    {
+      "basename": "03_retrieval_tradeoff",
+      "width_inches": 6.6141732283464565,
+      "height_inches": 4.488188976377953
+    },
+    {
+      "basename": "04_paired_hits",
+      "width_inches": 6.6141732283464565,
+      "height_inches": 4.094488188976378
+    },
+    {
+      "basename": "05_agent_performance",
+      "width_inches": 6.6141732283464565,
+      "height_inches": 4.68503937007874
+    },
+    {
+      "basename": "06_ai_quality",
+      "width_inches": 6.6141732283464565,
+      "height_inches": 4.488188976377953
+    },
+    {
+      "basename": "07_bad_cases",
+      "width_inches": 6.6141732283464565,
+      "height_inches": 4.448818897637795
+    },
+    {
+      "basename": "08_architecture",
+      "width_inches": 6.6141732283464565,
+      "height_inches": 6.062992125984252
+    }
+  ]
+}

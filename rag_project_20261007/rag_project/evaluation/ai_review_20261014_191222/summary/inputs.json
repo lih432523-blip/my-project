@@ -1,0 +1,9 @@
+{
+  "results": [
+    "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\agent55_20261014_175735_da23d1\\results.jsonl"
+  ],
+  "reviews": [
+    "D:\\codex workshop\\personal page\\other agent\\my-project\\rag_project_20261007\\rag_project\\evaluation\\runs\\agent55_20261014_175735_da23d1\\review.csv"
+  ],
+  "include_smoke": false
+}

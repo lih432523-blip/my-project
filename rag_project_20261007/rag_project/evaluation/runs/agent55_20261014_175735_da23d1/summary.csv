@@ -1,0 +1,14 @@
+﻿mode,chunk_size,method,category,execution_mode,n,failures,hit_at_5,mrr_at_5,recall_at_5,retrieval_gold_n,avg_wall_latency_s,p95_wall_latency_s,avg_steps,tool_match_rate,tool_gold_n,tool_expected_n,tool_coverage,avg_tokens,token_coverage,correctness,correctness_n,completeness,completeness_n,citation_accuracy,citation_accuracy_n,routing,routing_n,manual_n
+agent,512,hybrid_rerank,all,all,55,2,N/A,N/A,N/A,0,64.095769,168.345955,1.2,0.836364,55,55,1.0,4394.6,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,all,direct_tool,28,2,N/A,N/A,N/A,0,102.391363,174.935025,1.0,0.785714,28,28,1.0,4392.392857,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,all,react,27,0,N/A,N/A,N/A,0,24.38182,109.552499,1.407407,0.888889,27,27,1.0,4396.888889,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,comparison,all,15,0,N/A,N/A,N/A,0,118.946106,179.883566,1.0,1.0,15,15,1.0,4827.666667,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,comparison,direct_tool,15,0,N/A,N/A,N/A,0,118.946106,179.883566,1.0,1.0,15,15,1.0,4827.666667,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,factual,all,20,2,N/A,N/A,N/A,0,41.051783,111.454488,1.45,0.7,20,20,1.0,4295.25,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,factual,direct_tool,5,2,N/A,N/A,N/A,0,83.90473,111.454488,1.0,0.0,5,5,1.0,2413.0,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,factual,react,15,0,N/A,N/A,N/A,0,26.767467,128.793086,1.6,0.933333,15,15,1.0,4922.666667,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,reasoning,all,10,0,N/A,N/A,N/A,0,13.557712,18.997478,1.2,1.0,10,10,1.0,3901.1,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,reasoning,react,10,0,N/A,N/A,N/A,0,13.557712,18.997478,1.2,1.0,10,10,1.0,3901.1,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,summary,all,10,0,N/A,N/A,N/A,0,78.446293,110.961925,1.0,0.7,10,10,1.0,4437.2,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,summary,direct_tool,8,0,N/A,N/A,N/A,0,82.905366,110.961925,1.0,0.875,8,8,1.0,4813.375,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
+agent,512,hybrid_rerank,summary,react,2,0,N/A,N/A,N/A,0,60.610001,109.552499,1.0,0.0,2,2,1.0,2932.5,1.0,N/A,0,N/A,0,N/A,0,N/A,0,0
